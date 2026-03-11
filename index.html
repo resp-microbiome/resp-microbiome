@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Respiratory Microbiome Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* =============================================
+     DESIGN SYSTEM — MARATHON-INSPIRED BRUTALISM
+     Accessibility: WCAG AA throughout
+  ============================================= */
+  :root {
+    --teal:        #00B4A6;
+    --teal-dark:   #007A72;
+    --teal-light:  #5DCFC7;
+    --blue:        #0A2240;
+    --blue-mid:    #0E3A6B;
+    --blue-light:  #1A5FA8;
+    --orange:      #E8621A;
+    --orange-light:#FF8C42;
+    --white:       #F2F4F0;
+    --off-white:   #E8EAE5;
+    --grey:        #8A9099;
+    --dark:        #060E18;
+
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body:    'Barlow', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+
+    --grid-unit: 8px;
+    --max-w: 1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── UTILITY ── */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+  /* ── SKIP LINK (accessibility) ── */
+  .skip-link {
+    position: absolute; top: -100%; left: 16px;
+    background: var(--orange); color: var(--dark);
+    padding: 8px 16px; font-weight: 700; z-index: 9999;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 16px; }
+
+  /* =============================================
+     GEOMETRIC BACKGROUND PATTERN
+  ============================================= */
+  .geo-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      linear-gradient(135deg, transparent 48%, rgba(0,180,166,0.04) 48%, rgba(0,180,166,0.04) 52%, transparent 52%),
+      linear-gradient(45deg,  transparent 48%, rgba(0,180,166,0.03) 48%, rgba(0,180,166,0.03) 52%, transparent 52%);
+    background-size: 80px 80px;
+  }
+
+  /* =============================================
+     NAVIGATION
+  ============================================= */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(6,14,24,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,180,166,0.25);
+  }
+
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-mark {
+    width: 36px; height: 36px; position: relative; flex-shrink: 0;
+  }
+  .nav-logo-mark svg { width: 100%; height: 100%; }
+
+  .nav-logo-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .nav-logo-text span { color: var(--teal); display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; }
+
+  .nav-links {
+    display: flex; gap: 4px; list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    display: block; padding: 8px 14px;
+    font-family: var(--font-display);
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--off-white); text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 4px; left: 14px; right: 14px;
+    height: 2px; background: var(--teal);
+    transform: scaleX(0); transition: transform 0.2s;
+    transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after, .nav-links a:focus::after { transform: scaleX(1); }
+  .nav-links a:focus { outline: 2px solid var(--teal); outline-offset: 2px; color: var(--teal); }
+
+  .nav-uob {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--grey); text-decoration: none;
+    border: 1px solid rgba(138,144,153,0.3);
+    padding: 6px 12px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .nav-uob:hover { border-color: var(--teal); color: var(--teal); }
+  .nav-uob:focus { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  .nav-mobile-toggle {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    color: var(--white); padding: 8px;
+  }
+
+  /* =============================================
+     HERO
+  ============================================= */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding-top: 64px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--blue) 50%, var(--blue-mid) 100%);
+    z-index: -1;
+  }
+
+  /* Marathon-style diagonal slash */
+  .hero::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 55%; height: 100%;
+    background: var(--blue-mid);
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: -1;
+  }
+
+  .hero-content {
+    padding: 80px 32px 80px 0;
+    max-width: 640px;
+    margin-left: auto;
+    padding-left: 32px;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 32px; height: 2px;
+    background: var(--teal);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .hero-title .accent { color: var(--teal); display: block; }
+  .hero-title .accent-orange { color: var(--orange); }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    color: var(--off-white);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+  }
+
+  .hero-description {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--off-white);
+    opacity: 0.85;
+    max-width: 480px;
+    margin-bottom: 48px;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--teal);
+    color: var(--dark);
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 14px 28px;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+  .btn-primary:focus { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent;
+    color: var(--orange);
+    border: 2px solid var(--orange);
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 28px;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { background: var(--orange); color: var(--dark); transform: translateY(-2px); }
+  .btn-secondary:focus { outline: 3px solid var(--teal); outline-offset: 3px; }
+
+  /* Hero right: geometric diagram */
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 32px;
+    position: relative;
+  }
+
+  .hero-diagram {
+    width: 100%; max-width: 420px;
+    position: relative;
+  }
+
+  .hero-diagram svg {
+    width: 100%; height: auto;
+    filter: drop-shadow(0 0 40px rgba(0,180,166,0.3));
+  }
+
+  /* Stats ticker */
+  .hero-stats {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.5);
+    border-top: 1px solid rgba(0,180,166,0.3);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    z-index: 2;
+  }
+
+  .stat-item {
+    padding: 20px 24px;
+    border-right: 1px solid rgba(0,180,166,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 2rem; font-weight: 900;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-top: 4px;
+  }
+
+  /* =============================================
+     SECTION SHARED STYLES
+  ============================================= */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    display: flex; align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,180,166,0.2);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block; width: 20px; height: 2px;
+    background: var(--teal);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .section-title .teal { color: var(--teal); }
+
+  /* =============================================
+     RESEARCH THEMES
+  ============================================= */
+  .research {
+    padding: 100px 0;
+    background: linear-gradient(180deg, var(--blue) 0%, var(--dark) 100%);
+  }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .research-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(0,180,166,0.1);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .research-card:hover {
+    border-color: var(--teal);
+    background: rgba(0,180,166,0.06);
+  }
+  .research-card:focus-within {
+    border-color: var(--teal);
+  }
+
+  /* Marathon-style corner accent */
+  .research-card::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 40px; height: 40px;
+    border-top: 3px solid var(--orange);
+    border-right: 3px solid var(--orange);
+    transition: width 0.3s, height 0.3s;
+  }
+  .research-card:hover::before { width: 60px; height: 60px; }
+
+  .research-card-number {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--grey);
+    margin-bottom: 20px;
+  }
+
+  .research-card-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 20px;
+    color: var(--teal);
+  }
+
+  .research-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .research-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--off-white);
+    opacity: 0.75;
+  }
+
+  .research-card-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-dark);
+    border: 1px solid var(--teal-dark);
+    padding: 4px 10px;
+  }
+
+  /* =============================================
+     PEOPLE
+  ============================================= */
+  .people {
+    padding: 100px 0;
+    background: var(--dark);
+    position: relative;
+  }
+
+  .people::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2px;
+  }
+
+  .person-card {
+    background: rgba(10,34,64,0.6);
+    border: 1px solid rgba(0,180,166,0.08);
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .person-card:hover { border-color: rgba(0,180,166,0.4); }
+
+  .person-avatar {
+    width: 100%; aspect-ratio: 1;
+    background: var(--blue-mid);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Geometric placeholder avatar */
+  .person-avatar svg {
+    width: 60%; height: 60%;
+    opacity: 0.3;
+    color: var(--teal);
+  }
+
+  .person-avatar-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(6,14,24,0.9) 100%);
+  }
+
+  .person-info {
+    padding: 20px;
+  }
+
+  .person-role {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .person-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+
+  .person-detail {
+    font-size: 0.8rem;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  .person-links {
+    display: flex; gap: 8px;
+    padding: 0 20px 20px;
+  }
+
+  .person-link {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 4px 10px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .person-link:hover { border-color: var(--teal); color: var(--teal); }
+  .person-link:focus { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  .alumni-section {
+    margin-top: 64px;
+  }
+
+  .alumni-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .alumni-label::before {
+    content: ''; display: block; width: 20px; height: 2px;
+    background: var(--orange);
+  }
+
+  .alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+  }
+
+  .alumni-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(232,98,26,0.1);
+    padding: 20px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .alumni-card:hover {
+    border-color: rgba(232,98,26,0.4);
+    background: rgba(232,98,26,0.05);
+  }
+
+  .alumni-name {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .alumni-detail {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 4px;
+  }
+
+  .alumni-now {
+    font-size: 0.8rem;
+    color: var(--orange-light);
+    opacity: 0.8;
+  }
+
+  /* =============================================
+     PUBLICATIONS / NEWS TICKER
+  ============================================= */
+  .news-ticker {
+    background: var(--teal-dark);
+    padding: 12px 0;
+    overflow: hidden;
+    border-top: 2px solid var(--teal);
+    border-bottom: 2px solid var(--teal);
+  }
+
+  .ticker-inner {
+    display: flex;
+    animation: ticker 40s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-inner:hover { animation-play-state: paused; }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: inline-flex; align-items: center; gap: 16px;
+    padding: 0 32px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+  }
+
+  .ticker-item::before {
+    content: '▶';
+    color: var(--dark);
+    opacity: 0.5;
+    font-size: 0.5rem;
+  }
+
+  /* =============================================
+     JOIN US
+  ============================================= */
+  .join {
+    padding: 100px 0;
+    background: var(--blue);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .join::after {
+    content: 'JOIN';
+    position: absolute;
+    right: -40px; top: 50%; transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: 20vw; font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(0,180,166,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .join-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .join-content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+
+  .join-content h2 em {
+    font-style: normal;
+    color: var(--orange);
+  }
+
+  .join-content p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--off-white);
+    opacity: 0.85;
+    margin-bottom: 16px;
+  }
+
+  .join-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 32px;
+  }
+
+  .value-item {
+    background: rgba(0,180,166,0.06);
+    border-left: 3px solid var(--teal);
+    padding: 16px 20px;
+  }
+
+  .value-title {
+    font-family: var(--font-display);
+    font-size: 0.9rem; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .value-desc {
+    font-size: 0.8rem;
+    color: var(--off-white);
+    opacity: 0.7;
+  }
+
+  .join-opportunities h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+
+  .opportunity-item {
+    border: 1px solid rgba(232,98,26,0.2);
+    padding: 24px;
+    margin-bottom: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  }
+  .opportunity-item:hover {
+    border-color: var(--orange);
+    background: rgba(232,98,26,0.06);
+  }
+
+  .opp-type {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .opp-title {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .opp-desc {
+    font-size: 0.82rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* =============================================
+     FOOTER
+  ============================================= */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(0,180,166,0.15);
+    padding: 60px 0 32px;
+    position: relative; z-index: 1;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    color: var(--grey);
+    line-height: 1.75;
+    margin-top: 16px;
+    max-width: 280px;
+  }
+
+  .footer-logo-text {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+  .footer-logo-text span { color: var(--teal); }
+
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,180,166,0.2);
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 8px; }
+  .footer-col a {
+    font-size: 0.85rem;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--teal); }
+  .footer-col a:focus { outline: 2px solid var(--teal); outline-offset: 2px; color: var(--teal); }
+
+  .footer-uob {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px;
+    border: 1px solid rgba(0,180,166,0.15);
+    text-decoration: none;
+    margin-top: 16px;
+    transition: border-color 0.2s;
+  }
+  .footer-uob:hover { border-color: var(--teal); }
+
+  .footer-uob-badge {
+    background: var(--blue-light);
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 900; font-size: 0.7rem;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .footer-uob-text {
+    font-size: 0.75rem;
+    color: var(--grey);
+    line-height: 1.4;
+  }
+  .footer-uob-text strong { color: var(--off-white); display: block; font-size: 0.8rem; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+
+  .footer-bottom p {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .footer-accessibility {
+    display: flex; gap: 16px;
+  }
+  .footer-accessibility a {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-accessibility a:hover { color: var(--teal); }
+
+  /* =============================================
+     ANIMATIONS
+  ============================================= */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow  { animation-delay: 0.1s; }
+  .hero-title    { animation-delay: 0.25s; }
+  .hero-subtitle { animation-delay: 0.35s; }
+  .hero-description { animation-delay: 0.45s; }
+  .hero-ctas     { animation-delay: 0.55s; }
+
+  /* =============================================
+     RESPONSIVE
+  ============================================= */
+  @media (max-width: 1024px) {
+    .research-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid   { grid-template-columns: 1fr 1fr; }
+    .hero { grid-template-columns: 1fr; }
+    .hero::after { display: none; }
+    .hero-content { max-width: 100%; padding: 80px 32px 40px; margin: 0; }
+    .hero-visual { display: none; }
+    .hero-stats { position: relative; grid-template-columns: repeat(2, 1fr); }
+    .join-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 768px) {
+    .research-grid { grid-template-columns: 1fr; }
+    .footer-grid   { grid-template-columns: 1fr; }
+    .nav-links, .nav-uob { display: none; }
+    .nav-mobile-toggle { display: block; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .join-values { grid-template-columns: 1fr; }
+  }
+
+  /* =============================================
+     FOCUS VISIBLE (accessibility)
+  ============================================= */
+  :focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .research-card, .person-card, .alumni-card { border-color: var(--teal); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="geo-bg" aria-hidden="true"></div>
+
+<!-- ── NAVIGATION ── -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Respiratory Microbiome Group home">
+      <div class="nav-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="#00B4A6" stroke-width="1.5" fill="none"/>
+          <polygon points="18,8 28,13 28,23 18,28 8,23 8,13" fill="rgba(0,180,166,0.15)" stroke="#00B4A6" stroke-width="1"/>
+          <circle cx="18" cy="18" r="4" fill="#E8621A"/>
+          <line x1="18" y1="2"  x2="18" y2="8"  stroke="#00B4A6" stroke-width="1.5"/>
+          <line x1="18" y1="28" x2="18" y2="34" stroke="#00B4A6" stroke-width="1.5"/>
+          <line x1="2"  y1="10" x2="8"  y2="13" stroke="#00B4A6" stroke-width="1.5"/>
+          <line x1="28" y1="23" x2="34" y2="26" stroke="#00B4A6" stroke-width="1.5"/>
+          <line x1="34" y1="10" x2="28" y2="13" stroke="#00B4A6" stroke-width="1.5"/>
+          <line x1="8"  y1="23" x2="2"  y2="26" stroke="#00B4A6" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        Respiratory<br>Microbiome Group
+        <span>University of Birmingham</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#people">People</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#join">Join Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="https://www.birmingham.ac.uk" class="nav-uob" target="_blank" rel="noopener noreferrer" aria-label="University of Birmingham website (opens in new tab)">
+      UoB ↗
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Open navigation menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="6"  x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main id="main">
+
+  <!-- ── HERO ── -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-content container" style="grid-column: 1; padding-right: 0;">
+      <p class="hero-eyebrow" aria-hidden="true">University of Birmingham · Institute of Microbiology &amp; Infection</p>
+      <h1 class="hero-title">
+        Respiratory<br>
+        <span class="accent">Microbiome</span>
+        <span style="font-size: 0.55em; color: var(--off-white); opacity:0.5;">Group</span>
+      </h1>
+      <p class="hero-subtitle">Decoding the lung microbiome</p>
+      <p class="hero-description">
+        We investigate how microbial communities in the respiratory tract influence health, disease progression, and therapeutic outcomes — combining culture-independent sequencing, clinical cohort studies, and translational science to turn microbial insight into patient benefit.
+      </p>
+      <div class="hero-ctas">
+        <a href="#research" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Our Research
+        </a>
+        <a href="#join" class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Join the Group
+        </a>
+      </div>
+    </div>
+
+    <!-- Geometric lung/microbiome diagram -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-diagram">
+        <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(0,180,166,0.1)" stroke-width="1"/>
+          <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(0,180,166,0.1)" stroke-width="1"/>
+          <line x1="0" y1="300" x2="400" y2="300" stroke="rgba(0,180,166,0.1)" stroke-width="1"/>
+          <line x1="100" y1="0" x2="100" y2="420" stroke="rgba(0,180,166,0.1)" stroke-width="1"/>
+          <line x1="200" y1="0" x2="200" y2="420" stroke="rgba(0,180,166,0.1)" stroke-width="1"/>
+          <line x1="300" y1="0" x2="300" y2="420" stroke="rgba(0,180,166,0.1)" stroke-width="1"/>
+
+          <!-- Trachea -->
+          <rect x="185" y="20" width="30" height="60" rx="15" fill="none" stroke="#00B4A6" stroke-width="2"/>
+          <line x1="200" y1="80" x2="200" y2="100" stroke="#00B4A6" stroke-width="2"/>
+
+          <!-- Left lung outline (stylised geometric) -->
+          <path d="M200,100 L130,110 Q60,140 55,200 Q50,270 90,310 Q120,340 150,330 Q180,320 190,290 L200,100"
+            fill="rgba(0,180,166,0.08)" stroke="#00B4A6" stroke-width="1.5"/>
+
+          <!-- Right lung outline -->
+          <path d="M200,100 L270,110 Q340,140 345,200 Q350,270 310,310 Q280,340 250,330 Q220,320 210,290 L200,100"
+            fill="rgba(0,180,166,0.08)" stroke="#00B4A6" stroke-width="1.5"/>
+
+          <!-- Bronchial tree left -->
+          <line x1="200" y1="100" x2="155" y2="150" stroke="#5DCFC7" stroke-width="2"/>
+          <line x1="155" y1="150" x2="120" y2="185" stroke="#5DCFC7" stroke-width="1.5"/>
+          <line x1="155" y1="150" x2="148" y2="200" stroke="#5DCFC7" stroke-width="1.5"/>
+          <line x1="120" y1="185" x2="100" y2="215" stroke="#5DCFC7" stroke-width="1"/>
+          <line x1="120" y1="185" x2="118" y2="225" stroke="#5DCFC7" stroke-width="1"/>
+          <line x1="148" y1="200" x2="130" y2="240" stroke="#5DCFC7" stroke-width="1"/>
+          <line x1="148" y1="200" x2="155" y2="248" stroke="#5DCFC7" stroke-width="1"/>
+
+          <!-- Bronchial tree right -->
+          <line x1="200" y1="100" x2="245" y2="150" stroke="#5DCFC7" stroke-width="2"/>
+          <line x1="245" y1="150" x2="280" y2="185" stroke="#5DCFC7" stroke-width="1.5"/>
+          <line x1="245" y1="150" x2="252" y2="200" stroke="#5DCFC7" stroke-width="1.5"/>
+          <line x1="280" y1="185" x2="300" y2="215" stroke="#5DCFC7" stroke-width="1"/>
+          <line x1="280" y1="185" x2="282" y2="225" stroke="#5DCFC7" stroke-width="1"/>
+          <line x1="252" y1="200" x2="270" y2="240" stroke="#5DCFC7" stroke-width="1"/>
+          <line x1="252" y1="200" x2="245" y2="248" stroke="#5DCFC7" stroke-width="1"/>
+
+          <!-- Microbe nodes -->
+          <circle cx="100" cy="215" r="8" fill="#E8621A" opacity="0.9"/>
+          <circle cx="118" cy="225" r="6" fill="#E8621A" opacity="0.7"/>
+          <circle cx="130" cy="240" r="10" fill="#E8621A" opacity="0.8"/>
+          <circle cx="155" cy="248" r="7" fill="#00B4A6" opacity="0.9"/>
+          <circle cx="300" cy="215" r="9" fill="#00B4A6" opacity="0.9"/>
+          <circle cx="282" cy="225" r="6" fill="#E8621A" opacity="0.6"/>
+          <circle cx="270" cy="240" r="8" fill="#00B4A6" opacity="0.7"/>
+          <circle cx="245" cy="248" r="11" fill="#E8621A" opacity="0.8"/>
+
+          <!-- Labels -->
+          <text x="46" y="196" font-family="Space Mono" font-size="7" fill="rgba(0,180,166,0.6)" letter-spacing="1">RIGHT</text>
+          <text x="322" y="196" font-family="Space Mono" font-size="7" fill="rgba(0,180,166,0.6)" letter-spacing="1">LEFT</text>
+          <text x="34" y="207" font-family="Space Mono" font-size="6" fill="rgba(0,180,166,0.35)" letter-spacing="0.5">(patient's R)</text>
+          <text x="312" y="207" font-family="Space Mono" font-size="6" fill="rgba(0,180,166,0.35)" letter-spacing="0.5">(patient's L)</text>
+
+          <!-- Data readout -->
+          <rect x="10" y="360" width="180" height="50" fill="rgba(0,0,0,0.4)" stroke="rgba(0,180,166,0.3)" stroke-width="1"/>
+          <text x="20" y="375" font-family="Space Mono" font-size="7" fill="#00B4A6" letter-spacing="1">MICROBIOME ANALYSIS</text>
+          <text x="20" y="390" font-family="Space Mono" font-size="8" fill="rgba(242,244,240,0.8)">16S rRNA · Metagenomics</text>
+          <text x="20" y="403" font-family="Space Mono" font-size="7" fill="rgba(138,144,153,0.8)">Culture-independent methods</text>
+
+          <rect x="210" y="360" width="180" height="50" fill="rgba(0,0,0,0.4)" stroke="rgba(232,98,26,0.3)" stroke-width="1"/>
+          <text x="220" y="375" font-family="Space Mono" font-size="7" fill="#E8621A" letter-spacing="1">CLINICAL FOCUS</text>
+          <text x="220" y="390" font-family="Space Mono" font-size="8" fill="rgba(242,244,240,0.8)">COPD · Asthma · IPF</text>
+          <text x="220" y="403" font-family="Space Mono" font-size="7" fill="rgba(138,144,153,0.8)">Translational research</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="hero-stats" role="region" aria-label="Group statistics">
+      <div class="stat-item">
+        <div class="stat-number" aria-label="Over 50 publications">50+</div>
+        <div class="stat-label">Publications</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" aria-label="15 or more alumni">15+</div>
+        <div class="stat-label">Alumni</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" aria-label="Active since 2010">2010</div>
+        <div class="stat-label">Est.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" aria-label="University of Birmingham">UoB</div>
+        <div class="stat-label">Birmingham, UK</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEWS TICKER ── -->
+  <div class="news-ticker" aria-label="Recent news and updates" role="marquee" aria-live="off">
+    <div class="ticker-inner" aria-hidden="true">
+      <span class="ticker-item">New paper accepted in Microbiome Journal — lung microbiota in COPD exacerbations</span>
+      <span class="ticker-item">PhD position available — closing March 2025</span>
+      <span class="ticker-item">Congratulations to Dr. [Name] — awarded UKRI fellowship</span>
+      <span class="ticker-item">Group presents at ERS International Congress 2024</span>
+      <span class="ticker-item">Collaboration with NHS Trust expands clinical cohort to 400 patients</span>
+      <span class="ticker-item">Welcome to our new visiting researcher from [Institution]</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item">New paper accepted in Microbiome Journal — lung microbiota in COPD exacerbations</span>
+      <span class="ticker-item">PhD position available — closing March 2025</span>
+      <span class="ticker-item">Congratulations to Dr. [Name] — awarded UKRI fellowship</span>
+      <span class="ticker-item">Group presents at ERS International Congress 2024</span>
+      <span class="ticker-item">Collaboration with NHS Trust expands clinical cohort to 400 patients</span>
+      <span class="ticker-item">Welcome to our new visiting researcher from [Institution]</span>
+    </div>
+  </div>
+
+  <!-- ── RESEARCH ── -->
+  <section class="research" id="research" aria-labelledby="research-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-label">What we investigate</p>
+          <h2 id="research-heading" class="section-title">Research <span class="teal">Themes</span></h2>
+        </div>
+        <a href="#publications" class="btn-secondary" style="font-size:0.75rem; padding: 10px 20px;">View all publications →</a>
+      </div>
+
+      <div class="research-grid" role="list">
+        <article class="research-card" role="listitem">
+          <p class="research-card-number">01 / THEME</p>
+          <div class="research-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="24" cy="24" r="10"/>
+              <circle cx="24" cy="24" r="18" stroke-dasharray="4 4"/>
+              <circle cx="24" cy="8"  r="3" fill="currentColor"/>
+              <circle cx="38" cy="32" r="3" fill="currentColor"/>
+              <circle cx="10" cy="32" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Microbiome &amp; Disease Progression</h3>
+          <p>How do microbial community compositions in the lung associate with severity and progression of chronic respiratory disease? We use longitudinal 16S sequencing and metagenomics to map these relationships in COPD, asthma, and interstitial lung disease.</p>
+          <span class="research-card-tag">16S · Metagenomics · COPD</span>
+        </article>
+
+        <article class="research-card" role="listitem">
+          <p class="research-card-number">02 / THEME</p>
+          <div class="research-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M8 40 L24 8 L40 40 Z"/>
+              <line x1="16" y1="28" x2="32" y2="28"/>
+              <circle cx="24" cy="20" r="4" fill="currentColor" opacity="0.5"/>
+            </svg>
+          </div>
+          <h3>Host–Microbe Interactions</h3>
+          <p>We investigate how respiratory microbiota interact with airway epithelial cells and immune pathways — examining the role of specific taxa in modulating inflammatory responses and epithelial barrier function.</p>
+          <span class="research-card-tag">Immunology · In vitro · Transcriptomics</span>
+        </article>
+
+        <article class="research-card" role="listitem">
+          <p class="research-card-number">03 / THEME</p>
+          <div class="research-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="8" y="16" width="32" height="24" rx="2"/>
+              <path d="M16 16 V10 Q24 6 32 10 V16"/>
+              <circle cx="24" cy="28" r="6" fill="currentColor" opacity="0.3"/>
+              <line x1="24" y1="22" x2="24" y2="34"/>
+              <line x1="18" y1="28" x2="30" y2="28"/>
+            </svg>
+          </div>
+          <h3>Translational &amp; Clinical Science</h3>
+          <p>Working within NHS clinical partnerships, we translate microbiome discoveries into potential diagnostic biomarkers and therapeutic strategies — bridging the gap from sequencer to bedside in collaborative clinical cohort studies.</p>
+          <span class="research-card-tag">Biomarkers · NHS · Clinical cohorts</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PEOPLE ── -->
+  <section class="people" id="people" aria-labelledby="people-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-label">The team</p>
+          <h2 id="people-heading" class="section-title">Group <span class="teal">Members</span></h2>
+        </div>
+      </div>
+
+      <div class="people-grid" role="list">
+
+        <!-- PI Card -->
+        <article class="person-card" role="listitem">
+          <div class="person-avatar" aria-label="Photo placeholder for Principal Investigator">
+            <svg viewBox="0 0 80 80" fill="currentColor" aria-hidden="true">
+              <circle cx="40" cy="30" r="16"/>
+              <path d="M10 75 Q10 55 40 55 Q70 55 70 75"/>
+            </svg>
+            <div class="person-avatar-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="person-info">
+            <p class="person-role">Principal Investigator</p>
+            <h3 class="person-name">[PI Name]</h3>
+            <p class="person-detail">Professor of Respiratory Microbiology<br>University of Birmingham</p>
+          </div>
+          <div class="person-links">
+            <a href="https://www.birmingham.ac.uk" class="person-link" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a>
+            <a href="#" class="person-link">ORCID</a>
+            <a href="#" class="person-link">Scholar</a>
+          </div>
+        </article>
+
+        <!-- Member 2 -->
+        <article class="person-card" role="listitem">
+          <div class="person-avatar" aria-label="Photo placeholder for postdoctoral researcher">
+            <svg viewBox="0 0 80 80" fill="currentColor" aria-hidden="true">
+              <circle cx="40" cy="30" r="16"/>
+              <path d="M10 75 Q10 55 40 55 Q70 55 70 75"/>
+            </svg>
+            <div class="person-avatar-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="person-info">
+            <p class="person-role">Postdoctoral Researcher</p>
+            <h3 class="person-name">[Member Name]</h3>
+            <p class="person-detail">Metagenomics &amp; bioinformatics pipeline development</p>
+          </div>
+          <div class="person-links">
+            <a href="#" class="person-link">ORCID</a>
+            <a href="#" class="person-link">GitHub</a>
+          </div>
+        </article>
+
+        <!-- Member 3 -->
+        <article class="person-card" role="listitem">
+          <div class="person-avatar" aria-label="Photo placeholder for PhD student">
+            <svg viewBox="0 0 80 80" fill="currentColor" aria-hidden="true">
+              <circle cx="40" cy="30" r="16"/>
+              <path d="M10 75 Q10 55 40 55 Q70 55 70 75"/>
+            </svg>
+            <div class="person-avatar-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="person-info">
+            <p class="person-role">PhD Researcher</p>
+            <h3 class="person-name">[Member Name]</h3>
+            <p class="person-detail">Host–microbiome interactions in asthma exacerbations</p>
+          </div>
+          <div class="person-links">
+            <a href="#" class="person-link">ORCID</a>
+            <a href="#" class="person-link">LinkedIn</a>
+          </div>
+        </article>
+
+        <!-- Visitor -->
+        <article class="person-card" role="listitem">
+          <div class="person-avatar" aria-label="Photo placeholder for visiting researcher">
+            <svg viewBox="0 0 80 80" fill="currentColor" aria-hidden="true">
+              <circle cx="40" cy="30" r="16"/>
+              <path d="M10 75 Q10 55 40 55 Q70 55 70 75"/>
+            </svg>
+            <div class="person-avatar-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="person-info">
+            <p class="person-role" style="color: var(--orange-light);">Visiting Researcher</p>
+            <h3 class="person-name">[Visitor Name]</h3>
+            <p class="person-detail">Visiting from [Institution] · [Research focus]</p>
+          </div>
+          <div class="person-links">
+            <a href="#" class="person-link">Profile</a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Alumni -->
+      <div class="alumni-section">
+        <p class="alumni-label">Where are they now</p>
+        <div class="alumni-grid" role="list">
+          <article class="alumni-card" role="listitem">
+            <p class="alumni-name">[Alumni Name]</p>
+            <p class="alumni-detail">PhD · 2019–2023</p>
+            <p class="alumni-now">→ Postdoc, [Institution]</p>
+          </article>
+          <article class="alumni-card" role="listitem">
+            <p class="alumni-name">[Alumni Name]</p>
+            <p class="alumni-detail">PhD · 2018–2022</p>
+            <p class="alumni-now">→ Clinical Scientist, NHS</p>
+          </article>
+          <article class="alumni-card" role="listitem">
+            <p class="alumni-name">[Alumni Name]</p>
+            <p class="alumni-detail">Postdoc · 2017–2020</p>
+            <p class="alumni-now">→ Lecturer, [University]</p>
+          </article>
+          <article class="alumni-card" role="listitem">
+            <p class="alumni-name">[Alumni Name]</p>
+            <p class="alumni-detail">MRes · 2021–2022</p>
+            <p class="alumni-now">→ PhD student, [University]</p>
+          </article>
+          <article class="alumni-card" role="listitem">
+            <p class="alumni-name">[Alumni Name]</p>
+            <p class="alumni-detail">PhD · 2015–2019</p>
+            <p class="alumni-now">→ Industry, [Company]</p>
+          </article>
+          <article class="alumni-card" role="listitem">
+            <p class="alumni-name">[Alumni Name]</p>
+            <p class="alumni-detail">Visiting · 2022</p>
+            <p class="alumni-now">→ [Current position]</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── JOIN US ── -->
+  <section class="join" id="join" aria-labelledby="join-heading">
+    <div class="container">
+      <div class="join-grid">
+        <div class="join-content">
+          <p class="section-label">Work with us</p>
+          <h2 id="join-heading">
+            Build your<br>career in<br>
+            <em>respiratory<br>science</em>
+          </h2>
+          <p>We are a collaborative, supportive group that takes your development seriously. Whether you're a PhD student, postdoc, or visiting researcher, you'll work on clinically meaningful questions with real-world impact.</p>
+          <p>We welcome applications from candidates of all backgrounds. Diversity of perspective makes better science.</p>
+
+          <div class="join-values" role="list" aria-label="Group values">
+            <div class="value-item" role="listitem">
+              <p class="value-title">Open Science</p>
+              <p class="value-desc">We pre-register, share data, and publish openly where possible</p>
+            </div>
+            <div class="value-item" role="listitem">
+              <p class="value-title">Mentorship</p>
+              <p class="value-desc">Structured supervision with career development at its centre</p>
+            </div>
+            <div class="value-item" role="listitem">
+              <p class="value-title">Wellbeing</p>
+              <p class="value-desc">We take mental health and work–life balance seriously</p>
+            </div>
+            <div class="value-item" role="listitem">
+              <p class="value-title">Collaboration</p>
+              <p class="value-desc">Strong NHS, industry and international partnerships</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="join-opportunities">
+          <h3>Current Opportunities</h3>
+
+          <div class="opportunity-item">
+            <p class="opp-type">PhD Studentship</p>
+            <p class="opp-title">Microbial determinants of COPD exacerbation frequency</p>
+            <p class="opp-desc">UKRI-funded 4-year programme. Combining clinical sampling with multi-omics. Open to UK/International applicants. Start: October 2025.</p>
+          </div>
+
+          <div class="opportunity-item">
+            <p class="opp-type">Visiting Researcher</p>
+            <p class="opp-title">Short-term placements welcome</p>
+            <p class="opp-desc">We regularly host visiting researchers for 3–12 month placements. Bring your own funding or discuss options with us.</p>
+          </div>
+
+          <div class="opportunity-item">
+            <p class="opp-type">Undergraduate / MSc Projects</p>
+            <p class="opp-title">Final-year and Masters projects</p>
+            <p class="opp-desc">University of Birmingham students: we offer supervised projects in bioinformatics, microbiology, and clinical research annually.</p>
+          </div>
+
+          <div style="margin-top: 32px;">
+            <a href="#contact" class="btn-primary">
+              Get in touch →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo-text">Respiratory <span>Microbiome</span> Group</p>
+        <p>Investigating the role of microbial communities in respiratory health and disease. Based at the Institute of Microbiology &amp; Infection, University of Birmingham.</p>
+        <a href="https://www.birmingham.ac.uk" class="footer-uob" target="_blank" rel="noopener noreferrer" aria-label="University of Birmingham (opens in new tab)">
+          <span class="footer-uob-badge" aria-hidden="true">UoB</span>
+          <span class="footer-uob-text">
+            <strong>University of Birmingham</strong>
+            Institute of Microbiology &amp; Infection
+          </span>
+        </a>
+      </div>
+
+      <nav class="footer-col" aria-label="Site navigation">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#people">People</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#join">Join Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-label="External links">
+        <h4>External</h4>
+        <ul>
+          <li><a href="https://www.birmingham.ac.uk" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a></li>
+          <li><a href="https://orcid.org" target="_blank" rel="noopener noreferrer">ORCID ↗</a></li>
+          <li><a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer">PubMed ↗</a></li>
+          <li><a href="https://bsky.app" target="_blank" rel="noopener noreferrer">Bluesky ↗</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col" id="contact" aria-labelledby="contact-heading">
+        <h4 id="contact-heading">Contact</h4>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#57302538222717353e253a3e39303f363a79363479223c"><span class="__cf_email__" data-cfemail="2542574a505565474c57484c4b424d44480b44460b504e">[email&#160;protected]</span></a></li>
+        </ul>
+        <p style="font-size:0.8rem; color: var(--grey); margin-top: 16px; line-height: 1.7;">
+          Institute of Microbiology &amp; Infection<br>
+          University of Birmingham<br>
+          Edgbaston, Birmingham<br>
+          B15 2TT, UK
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Respiratory Microbiome Group · University of Birmingham</p>
+      <div class="footer-accessibility">
+        <a href="#main">Accessibility</a>
+        <a href="#">Privacy</a>
+        <a href="#">Site Map</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (toggle && navLinks) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      navLinks.style.display = expanded ? 'none' : 'flex';
+      navLinks.style.flexDirection = expanded ? '' : 'column';
+      navLinks.style.position = expanded ? '' : 'fixed';
+      navLinks.style.top = expanded ? '' : '64px';
+      navLinks.style.left = expanded ? '' : '0';
+      navLinks.style.right = expanded ? '' : '0';
+      navLinks.style.background = expanded ? '' : 'rgba(6,14,24,0.97)';
+      navLinks.style.padding = expanded ? '' : '16px 32px';
+      navLinks.style.borderBottom = expanded ? '' : '1px solid rgba(0,180,166,0.2)';
+    });
+  }
+
+  // Smooth active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.removeAttribute('aria-current'));
+        const active = 

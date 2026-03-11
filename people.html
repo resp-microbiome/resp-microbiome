@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People — Respiratory Microbiome Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:#00B4A6; --teal-dark:#007A72; --teal-light:#5DCFC7;
+    --blue:#0A2240; --blue-mid:#0E3A6B; --blue-light:#1A5FA8;
+    --orange:#E8621A; --orange-light:#FF8C42;
+    --white:#F2F4F0; --off-white:#E8EAE5; --grey:#8A9099; --dark:#060E18;
+    --font-display:'Barlow Condensed',sans-serif;
+    --font-body:'Barlow',sans-serif;
+    --font-mono:'Space Mono',monospace;
+    --max-w:1280px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--blue);color:var(--white);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden;}
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 32px;}
+  .skip-link{position:absolute;top:-100%;left:16px;background:var(--orange);color:var(--dark);padding:8px 16px;font-weight:700;z-index:9999;text-decoration:none;}
+  .skip-link:focus{top:16px;}
+  .geo-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,transparent 48%,rgba(0,180,166,0.04) 48%,rgba(0,180,166,0.04) 52%,transparent 52%),linear-gradient(45deg,transparent 48%,rgba(0,180,166,0.03) 48%,rgba(0,180,166,0.03) 52%,transparent 52%);background-size:80px 80px;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,14,24,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,180,166,0.25);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-w);margin:0 auto;padding:0 32px;}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-mark{width:36px;height:36px;flex-shrink:0;}
+  .nav-logo-mark svg{width:100%;height:100%;}
+  .nav-logo-text{font-family:var(--font-display);font-weight:800;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--white);line-height:1.1;}
+  .nav-logo-text span{color:var(--teal);display:block;font-size:0.7rem;font-weight:600;letter-spacing:0.15em;}
+  .nav-links{display:flex;gap:4px;list-style:none;align-items:center;}
+  .nav-links a{display:block;padding:8px 14px;font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--off-white);text-decoration:none;transition:color 0.2s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:4px;left:14px;right:14px;height:2px;background:var(--teal);transform:scaleX(0);transition:transform 0.2s;transform-origin:left;}
+  .nav-links a:hover{color:var(--teal);}
+  .nav-links a:hover::after,.nav-links a:focus::after,.nav-links a[aria-current]::after{transform:scaleX(1);}
+  .nav-links a[aria-current]{color:var(--teal);}
+  .nav-links a:focus{outline:2px solid var(--teal);outline-offset:2px;color:var(--teal);}
+  .nav-uob{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:0.65rem;color:var(--grey);text-decoration:none;border:1px solid rgba(138,144,153,0.3);padding:6px 12px;transition:border-color 0.2s,color 0.2s;}
+  .nav-uob:hover{border-color:var(--teal);color:var(--teal);}
+  .nav-mobile-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:8px;}
+
+  /* PAGE HEADER */
+  .page-header{padding:120px 0 64px;background:linear-gradient(135deg,var(--dark) 0%,var(--blue) 60%,var(--blue-mid) 100%);position:relative;overflow:hidden;z-index:1;}
+  .page-header::after{content:'PEOPLE';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--font-display);font-size:18vw;font-weight:900;text-transform:uppercase;color:rgba(0,180,166,0.04);line-height:1;pointer-events:none;}
+  .page-header-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .page-eyebrow{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+  .page-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--teal);}
+  .page-title{font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);font-weight:900;text-transform:uppercase;line-height:0.95;color:var(--white);}
+  .page-title span{color:var(--teal);}
+  .page-subtitle{font-size:1rem;color:var(--off-white);opacity:0.75;max-width:520px;line-height:1.75;margin-top:20px;}
+
+  /* SECTION SHARED */
+  section{position:relative;z-index:1;}
+  .section-label{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .section-label::before{content:'';display:inline-block;width:20px;height:2px;background:var(--teal);}
+  .section-label.orange{color:var(--orange);}
+  .section-label.orange::before{background:var(--orange);}
+
+  /* PI FEATURE */
+  .pi-section{padding:80px 0 60px;background:var(--dark);}
+  .pi-card{display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid rgba(0,180,166,0.2);overflow:hidden;position:relative;}
+  .pi-card::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;border-top:3px solid var(--orange);border-right:3px solid var(--orange);}
+  .pi-photo{background:var(--blue-mid);display:flex;align-items:center;justify-content:center;position:relative;min-height:320px;}
+  .pi-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+  .pi-photo-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:absolute;inset:0;}
+  .pi-photo-placeholder svg{width:55%;height:55%;color:var(--teal);opacity:0.2;}
+  .pi-photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(6,14,24,0.95));padding:24px 20px 16px;}
+  .pi-photo-label p{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);}
+  .pi-content{padding:40px;}
+  .pi-role{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+  .pi-name{font-family:var(--font-display);font-size:2.5rem;font-weight:900;text-transform:uppercase;line-height:1;color:var(--white);margin-bottom:8px;}
+  .pi-title{font-size:0.9rem;color:var(--grey);margin-bottom:24px;}
+  .pi-bio{font-size:0.95rem;line-height:1.8;color:var(--off-white);opacity:0.85;margin-bottom:28px;}
+  .pi-links{display:flex;gap:8px;flex-wrap:wrap;}
+
+  /* MEMBER GRID */
+  .members-section{padding:60px 0;background:var(--blue);}
+  .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;}
+  .member-card{background:rgba(10,34,64,0.7);border:1px solid rgba(0,180,166,0.08);position:relative;overflow:hidden;transition:border-color 0.3s,background 0.3s;}
+  .member-card:hover{border-color:rgba(0,180,166,0.35);background:rgba(10,34,64,0.9);}
+  .member-card::before{content:'';position:absolute;top:0;right:0;width:30px;height:30px;border-top:2px solid var(--teal);border-right:2px solid var(--teal);opacity:0;transition:opacity 0.3s,width 0.3s,height 0.3s;}
+  .member-card:hover::before{opacity:1;width:44px;height:44px;}
+  .member-photo{width:100%;aspect-ratio:4/3;background:var(--blue-mid);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .member-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+  .member-photo-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:absolute;inset:0;}
+  .member-photo-placeholder svg{width:45%;height:45%;color:var(--teal);opacity:0.2;}
+  .member-photo-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,14,24,0.85) 100%);}
+  .member-info{padding:24px;}
+  .member-role{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+  .member-role.visitor{color:var(--orange-light);}
+  .member-name{font-family:var(--font-display);font-size:1.4rem;font-weight:800;text-transform:uppercase;letter-spacing:0.03em;color:var(--white);margin-bottom:6px;line-height:1.1;}
+  .member-focus{font-size:0.82rem;color:var(--grey);line-height:1.55;margin-bottom:16px;}
+  .member-links{display:flex;gap:6px;flex-wrap:wrap;}
+
+  /* LINK BUTTONS */
+  .link-btn{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--off-white);text-decoration:none;border:1px solid rgba(255,255,255,0.15);padding:5px 10px;transition:border-color 0.2s,color 0.2s,background 0.2s;}
+  .link-btn:hover{border-color:var(--teal);color:var(--teal);}
+  .link-btn:focus{outline:2px solid var(--teal);outline-offset:2px;}
+  .link-btn.orcid{border-color:rgba(166,206,57,0.3);color:rgba(166,206,57,0.8);}
+  .link-btn.orcid:hover{border-color:#A6CE39;color:#A6CE39;}
+
+  /* VISITOR BANNER */
+  .visitors-section{padding:60px 0;background:var(--dark);}
+  .visitor-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px;}
+  .visitor-card{background:rgba(232,98,26,0.04);border:1px solid rgba(232,98,26,0.15);padding:24px;transition:border-color 0.2s,background 0.2s;}
+  .visitor-card:hover{border-color:rgba(232,98,26,0.4);background:rgba(232,98,26,0.08);}
+  .visitor-period{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
+  .visitor-name{font-family:var(--font-display);font-size:1.2rem;font-weight:800;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+  .visitor-from{font-size:0.8rem;color:var(--grey);margin-bottom:8px;}
+  .visitor-focus{font-size:0.8rem;color:var(--off-white);opacity:0.7;line-height:1.5;}
+
+  /* ALUMNI */
+  .alumni-section{padding:80px 0;background:var(--blue);}
+  .alumni-intro{max-width:640px;font-size:0.95rem;color:var(--off-white);opacity:0.8;line-height:1.75;margin-bottom:48px;}
+  .alumni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;}
+  .alumni-card{background:rgba(255,255,255,0.02);border:1px solid rgba(232,98,26,0.1);padding:24px;transition:border-color 0.2s,background 0.2s;position:relative;overflow:hidden;}
+  .alumni-card:hover{border-color:rgba(232,98,26,0.35);background:rgba(232,98,26,0.05);}
+  .alumni-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+  .alumni-card:hover::after{transform:scaleX(1);}
+  .alumni-years{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);margin-bottom:8px;}
+  .alumni-name{font-family:var(--font-display);font-size:1.2rem;font-weight:800;text-transform:uppercase;color:var(--white);margin-bottom:4px;line-height:1.1;}
+  .alumni-degree{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+  .alumni-thesis{font-size:0.8rem;color:var(--grey);line-height:1.5;margin-bottom:12px;font-style:italic;}
+  .alumni-now{font-size:0.82rem;color:var(--orange-light);display:flex;align-items:center;gap:6px;}
+  .alumni-now::before{content:'→';font-weight:700;}
+  .alumni-links{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+
+  /* FOOTER */
+  footer{background:var(--dark);border-top:1px solid rgba(0,180,166,0.15);padding:60px 0 32px;position:relative;z-index:1;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+  .footer-brand p{font-size:0.85rem;color:var(--grey);line-height:1.75;margin-top:16px;max-width:280px;}
+  .footer-logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);}
+  .footer-logo-text span{color:var(--teal);}
+  .footer-col h4{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(0,180,166,0.2);}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:8px;}
+  .footer-col a{font-size:0.85rem;color:var(--grey);text-decoration:none;transition:color 0.2s;}
+  .footer-col a:hover{color:var(--teal);}
+  .footer-uob{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid rgba(0,180,166,0.15);text-decoration:none;margin-top:16px;transition:border-color 0.2s;}
+  .footer-uob:hover{border-color:var(--teal);}
+  .footer-uob-badge{background:var(--blue-light);width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:0.7rem;color:var(--white);flex-shrink:0;}
+  .footer-uob-text{font-size:0.75rem;color:var(--grey);line-height:1.4;}
+  .footer-uob-text strong{color:var(--off-white);display:block;font-size:0.8rem;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);}
+  .footer-accessibility{display:flex;gap:16px;}
+  .footer-accessibility a{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);text-decoration:none;}
+  .footer-accessibility a:hover{color:var(--teal);}
+
+  @media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr;}.pi-card{grid-template-columns:1fr;}.pi-photo{min-height:280px;}}
+  @media(max-width:768px){.nav-links,.nav-uob{display:none;}.nav-mobile-toggle{display:block;}.footer-grid{grid-template-columns:1fr;}}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  @media(prefers-contrast:high){.member-card,.alumni-card{border-color:var(--teal);}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="geo-bg" aria-hidden="true"></div>
+
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Respiratory Microbiome Group home">
+      <div class="nav-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="#00B4A6" stroke-width="1.5" fill="none"/><polygon points="18,8 28,13 28,23 18,28 8,23 8,13" fill="rgba(0,180,166,0.15)" stroke="#00B4A6" stroke-width="1"/><circle cx="18" cy="18" r="4" fill="#E8621A"/><line x1="18" y1="2" x2="18" y2="8" stroke="#00B4A6" stroke-width="1.5"/><line x1="18" y1="28" x2="18" y2="34" stroke="#00B4A6" stroke-width="1.5"/><line x1="2" y1="10" x2="8" y2="13" stroke="#00B4A6" stroke-width="1.5"/><line x1="28" y1="23" x2="34" y2="26" stroke="#00B4A6" stroke-width="1.5"/><line x1="34" y1="10" x2="28" y2="13" stroke="#00B4A6" stroke-width="1.5"/><line x1="8" y1="23" x2="2" y2="26" stroke="#00B4A6" stroke-width="1.5"/></svg>
+      </div>
+      <div class="nav-logo-text">Respiratory<br>Microbiome Group<span>University of Birmingham</span></div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="research.html">Research</a></li>
+      <li><a href="people.html" aria-current="page">People</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="join.html">Join Us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="https://www.birmingham.ac.uk" class="nav-uob" target="_blank" rel="noopener noreferrer">UoB ↗</a>
+    <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+  <header class="page-header">
+    <div class="container">
+      <div class="page-header-inner">
+        <div>
+          <p class="page-eyebrow">The Team</p>
+          <h1 class="page-title">Group <span>Members</span></h1>
+          <p class="page-subtitle">We are a small, focused group united by curiosity about the respiratory microbiome. Past and present members have gone on to positions in academia, the NHS, and industry worldwide.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PI -->
+  <section class="pi-section" aria-labelledby="pi-heading">
+    <div class="container">
+      <p class="section-label">Principal Investigator</p>
+      <article class="pi-card">
+        <div class="pi-photo" aria-label="Photo of [PI Full Name] — replace placeholder image by adding: <img src='images/pi-name.jpg' alt='[PI Full Name]'>">
+          <div class="pi-photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="30" r="18"/><path d="M8 78 Q8 56 40 56 Q72 56 72 78"/></svg>
+          </div>
+          <div class="pi-photo-label">
+            <!-- EDIT: replace with real photo by adding <img src="images/[filename].jpg" alt="[PI Full Name]"> inside .pi-photo -->
+            <p>Photo placeholder — add image file</p>
+          </div>
+        </div>
+        <div class="pi-content">
+          <p class="pi-role">Principal Investigator</p>
+          <!-- EDIT: Replace [PI Full Name], [Academic Title], [Department] below -->
+          <h2 id="pi-heading" class="pi-name">[PI Full Name]</h2>
+          <p class="pi-title">[Academic Title] · [Department] · University of Birmingham</p>
+          <!-- EDIT: Replace with PI biography (2–3 paragraphs) -->
+          <p class="pi-bio">[PI biography: describe research background, key interests, career history, and what drives their work on the respiratory microbiome. 2–3 paragraphs recommended. Plain text is fine here — no special formatting needed.]</p>
+          <div class="pi-links">
+            <!-- EDIT: Replace # with actual URLs. Remove any links that don't apply. -->
+            <a href="https://www.birmingham.ac.uk/staff/[STAFF-URL]" class="link-btn" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+            <!-- OPTIONAL: <a href="mailto:[EMAIL]" class="link-btn">Email</a> -->
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CURRENT MEMBERS -->
+  <section class="members-section" aria-labelledby="members-heading">
+    <div class="container">
+      <p class="section-label">Current Members</p>
+      <h2 id="members-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:40px;">The <span style="color:var(--teal);">Team</span></h2>
+
+      <div class="members-grid" role="list">
+
+        <!-- ── MEMBER CARD TEMPLATE ──
+             Duplicate this block for each current member.
+             Fields to edit are marked with EDIT comments. -->
+
+        <article class="member-card" role="listitem">
+          <div class="member-photo" aria-label="Photo of [Member Name] — add image file to replace placeholder">
+            <div class="member-photo-placeholder" aria-hidden="true">
+              <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="28" r="15"/><path d="M10 72 Q10 52 40 52 Q70 52 70 72"/></svg>
+            </div>
+            <!-- EDIT: Replace comment with <img src="images/[filename].jpg" alt="[Member Name]"> -->
+            <div class="member-photo-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="member-info">
+            <!-- EDIT: Change role label. Options: Postdoctoral Researcher / PhD Researcher / Research Fellow / MRes Student -->
+            <p class="member-role">Postdoctoral Researcher</p>
+            <!-- EDIT: Replace [Member Full Name] -->
+            <h3 class="member-name">[Member Full Name]</h3>
+            <!-- EDIT: Replace with their research focus (1–2 sentences) -->
+            <p class="member-focus">[Research focus: e.g. "Investigating microbiome dynamics in COPD using longitudinal 16S rRNA sequencing and bioinformatics pipeline development."]</p>
+            <div class="member-links">
+              <!-- EDIT: Replace # with URLs. Remove links that don't apply. -->
+              <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+              <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Scholar ↗</a>
+              <a href="https://github.com/[GITHUB-USERNAME]" class="link-btn" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="member-card" role="listitem">
+          <div class="member-photo" aria-label="Photo of [Member Name] — add image file to replace placeholder">
+            <div class="member-photo-placeholder" aria-hidden="true">
+              <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="28" r="15"/><path d="M10 72 Q10 52 40 52 Q70 52 70 72"/></svg>
+            </div>
+            <div class="member-photo-overlay" aria-hidden="true"></div>
+          </div>
+          <div class="member-info">
+            <p class="member-role">PhD Researcher</p>
+            <h3 class="member-name">[Member Full Name]</h3>
+            <p class="member-focus">[Research focus: e.g. "Host–microbiome interactions in severe asthma: examining microbial regulation of airway epithelial barrier function."]</p>
+            <div class="member-links">
+              <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+              <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ADD MORE MEMBERS: Copy and paste one of the article blocks above for each additional member -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VISITORS -->
+  <section class="visitors-section" aria-labelledby="visitors-heading">
+    <div class="container">
+      <p class="section-label orange">Visiting Researchers</p>
+      <h2 id="visitors-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:40px;">Current <span style="color:var(--orange);">Visitors</span></h2>
+
+      <div class="visitor-strip" role="list">
+
+        <!-- EDIT: Fill in details for each current visitor. Duplicate block as needed. -->
+        <article class="visitor-card" role="listitem">
+          <!-- EDIT: Replace with visit dates e.g. "Jan – Jun 2025" -->
+          <p class="visitor-period">[Visit period, e.g. Jan – Jun 2025]</p>
+          <h3 class="visitor-name">[Visitor Full Name]</h3>
+          <!-- EDIT: Replace with their home institution -->
+          <p class="visitor-from">[Home institution, e.g. University of X, Country]</p>
+          <!-- EDIT: Brief description of what they're working on during visit -->
+          <p class="visitor-focus">[What they are working on during their visit.]</p>
+        </article>
+
+        <!-- If no current visitors, replace the card above with:
+        <p style="color:var(--grey);font-size:0.9rem;">No visitors currently in residence. Interested in visiting? <a href="join.html" style="color:var(--orange);">Get in touch →</a></p>
+        -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ALUMNI -->
+  <section class="alumni-section" aria-labelledby="alumni-heading">
+    <div class="container">
+      <p class="section-label orange">Group Alumni</p>
+      <h2 id="alumni-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:16px;">Where Are <span style="color:var(--orange);">They Now</span></h2>
+      <p class="alumni-intro">Our former students and researchers have gone on to careers across academia, the NHS, biotech, and beyond. We are proud of every one of them.</p>
+
+      <div class="alumni-grid" role="list">
+
+        <!-- ── ALUMNI CARD TEMPLATE ──
+             Duplicate for each alumnus/alumna.
+             Fields marked EDIT. -->
+
+        <article class="alumni-card" role="listitem">
+          <!-- EDIT: e.g. "2019 – 2023" -->
+          <p class="alumni-years">[Start year] – [End year]</p>
+          <h3 class="alumni-name">[Alumni Full Name]</h3>
+          <!-- EDIT: e.g. "PhD" / "MRes" / "Postdoctoral Researcher" / "Visiting Researcher" -->
+          <p class="alumni-degree">[Degree / Role]</p>
+          <!-- EDIT: Short thesis title or project description. Delete line if not applicable. -->
+          <p class="alumni-thesis">"[Thesis title or project description]"</p>
+          <!-- EDIT: Where they are now -->
+          <p class="alumni-now">[Current position, e.g. Postdoctoral Researcher at University of X]</p>
+          <div class="alumni-links">
+            <!-- EDIT: Add relevant links, or delete div if none -->
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          </div>
+        </article>
+
+        <article class="alumni-card" role="listitem">
+          <p class="alumni-years">[Start year] – [End year]</p>
+          <h3 class="alumni-name">[Alumni Full Name]</h3>
+          <p class="alumni-degree">[Degree / Role]</p>
+          <p class="alumni-thesis">"[Thesis title or project description]"</p>
+          <p class="alumni-now">[Current position]</p>
+          <div class="alumni-links">
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          </div>
+        </article>
+
+        <article class="alumni-card" role="listitem">
+          <p class="alumni-years">[Start year] – [End year]</p>
+          <h3 class="alumni-name">[Alumni Full Name]</h3>
+          <p class="alumni-degree">[Degree / Role]</p>
+          <p class="alumni-thesis">"[Thesis title or project description]"</p>
+          <p class="alumni-now">[Current position]</p>
+          <div class="alumni-links">
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+          </div>
+        </article>
+
+        <!-- ADD MORE: Copy and paste alumni-card article blocks above -->
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo-text">Respiratory <span>Microbiome</span> Group</p>
+        <p>Investigating the role of microbial communities in respiratory health and disease. Based at the Institute of Microbiology &amp; Infection, University of Birmingham.</p>
+        <a href="https://www.birmingham.ac.uk" class="footer-uob" target="_blank" rel="noopener noreferrer">
+          <span class="footer-uob-badge">UoB</span>
+          <span class="footer-uob-text"><strong>University of Birmingham</strong>Institute of Microbiology &amp; Infection</span>
+        </a>
+      </div>
+      <nav class="footer-col" aria-label="Site navigation">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="join.html">Join Us</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="External links">
+        <h4>External</h4>
+        <ul>
+          <li><a href="https://www.birmingham.ac.uk" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a></li>
+          <li><a href="https://orcid.org" target="_blank" rel="noopener noreferrer">ORCID ↗</a></li>
+          <li><a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer">PubMed ↗</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <!-- EDIT: Replace with real email address -->
+          <li><a href="mailto:[GROUP-EMAIL]@birmingham.ac.uk">[GROUP-EMAIL]@birmingham.ac.uk</a></li>
+        </ul>
+        <p style="font-size:0.8rem;color:var(--grey);margin-top:16px;line-height:1.7;">Institute of Microbiology &amp; Infection<br>University of Birmingham<br>Edgbaston, Birmingham<br>B15 2TT, UK</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Respiratory Microbiome Group · University of Birmingham</p>
+      <div class="footer-accessibility">
+        <a href="#">Accessibility</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector('.nav-mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if(toggle && navLinks){toggle.addEventListener('click',()=>{const e=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!e));navLinks.style.display=e?'none':'flex';navLinks.style.flexDirection=e?'':'column';navLinks.style.position=e?'':'fixed';navLinks.style.top=e?'':'64px';navLinks.style.left=e?'':'0';navLinks.style.right=e?'':'0';navLinks.style.background=e?'':'rgba(6,14,24,0.97)';navLinks.style.padding=e?'':'16px 32px';navLinks.style.borderBottom=e?'':'1px solid rgba(0,180,166,0.2)';});}
+</script>
+</body>
+</html>

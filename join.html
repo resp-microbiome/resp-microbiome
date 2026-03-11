@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Us — Respiratory Microbiome Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#00B4A6;--teal-dark:#007A72;--teal-light:#5DCFC7;--blue:#0A2240;--blue-mid:#0E3A6B;--blue-light:#1A5FA8;--orange:#E8621A;--orange-light:#FF8C42;--white:#F2F4F0;--off-white:#E8EAE5;--grey:#8A9099;--dark:#060E18;--font-display:'Barlow Condensed',sans-serif;--font-body:'Barlow',sans-serif;--font-mono:'Space Mono',monospace;--max-w:1280px;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--blue);color:var(--white);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden;}
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 32px;}
+  .skip-link{position:absolute;top:-100%;left:16px;background:var(--orange);color:var(--dark);padding:8px 16px;font-weight:700;z-index:9999;text-decoration:none;}
+  .skip-link:focus{top:16px;}
+  .geo-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,transparent 48%,rgba(0,180,166,0.04) 48%,rgba(0,180,166,0.04) 52%,transparent 52%),linear-gradient(45deg,transparent 48%,rgba(0,180,166,0.03) 48%,rgba(0,180,166,0.03) 52%,transparent 52%);background-size:80px 80px;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,14,24,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,180,166,0.25);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-w);margin:0 auto;padding:0 32px;}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-mark{width:36px;height:36px;flex-shrink:0;}
+  .nav-logo-mark svg{width:100%;height:100%;}
+  .nav-logo-text{font-family:var(--font-display);font-weight:800;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--white);line-height:1.1;}
+  .nav-logo-text span{color:var(--teal);display:block;font-size:0.7rem;font-weight:600;letter-spacing:0.15em;}
+  .nav-links{display:flex;gap:4px;list-style:none;align-items:center;}
+  .nav-links a{display:block;padding:8px 14px;font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--off-white);text-decoration:none;transition:color 0.2s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:4px;left:14px;right:14px;height:2px;background:var(--teal);transform:scaleX(0);transition:transform 0.2s;transform-origin:left;}
+  .nav-links a:hover,.nav-links a[aria-current]{color:var(--teal);}
+  .nav-links a:hover::after,.nav-links a[aria-current]::after{transform:scaleX(1);}
+  .nav-uob{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:0.65rem;color:var(--grey);text-decoration:none;border:1px solid rgba(138,144,153,0.3);padding:6px 12px;transition:border-color 0.2s,color 0.2s;}
+  .nav-uob:hover{border-color:var(--teal);color:var(--teal);}
+  .nav-mobile-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:8px;}
+
+  /* HERO */
+  .join-hero{min-height:60vh;padding:120px 0 80px;background:linear-gradient(135deg,var(--dark) 0%,var(--blue) 50%,var(--blue-mid) 100%);position:relative;overflow:hidden;display:flex;align-items:center;z-index:1;}
+  .join-hero::after{content:'JOIN';position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-family:var(--font-display);font-size:20vw;font-weight:900;text-transform:uppercase;color:rgba(232,98,26,0.04);line-height:1;pointer-events:none;}
+  .join-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .page-eyebrow{font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+  .page-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--teal);}
+  .page-eyebrow.orange{color:var(--orange);}
+  .page-eyebrow.orange::before{background:var(--orange);}
+  .join-hero-title{font-family:var(--font-display);font-size:clamp(3rem,6vw,5.5rem);font-weight:900;text-transform:uppercase;line-height:0.95;color:var(--white);margin-bottom:24px;}
+  .join-hero-title em{font-style:normal;color:var(--orange);}
+  .join-hero-body{font-size:1rem;color:var(--off-white);opacity:0.85;line-height:1.8;margin-bottom:32px;}
+  .join-hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:var(--dark);font-family:var(--font-display);font-weight:800;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 28px;text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:background 0.2s,transform 0.15s;}
+  .join-hero-cta:hover{background:var(--orange-light);transform:translateY(-2px);}
+  .join-hero-cta:focus{outline:3px solid var(--teal);outline-offset:3px;}
+
+  /* Quick stats panel */
+  .hero-panel{background:rgba(0,0,0,0.4);border:1px solid rgba(232,98,26,0.2);padding:32px;}
+  .hero-panel h3{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:24px;}
+  .panel-stat{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .panel-stat:last-child{border-bottom:none;}
+  .panel-stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--teal);line-height:1;min-width:60px;}
+  .panel-stat-label{font-size:0.85rem;color:var(--off-white);opacity:0.8;}
+
+  /* VALUES */
+  .values-section{padding:80px 0;background:var(--dark);position:relative;z-index:1;}
+  .values-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);}
+  .values-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;margin-top:48px;}
+  .value-card{background:rgba(0,180,166,0.04);border:1px solid rgba(0,180,166,0.1);padding:36px;position:relative;overflow:hidden;transition:border-color 0.3s,background 0.3s;}
+  .value-card:hover{border-color:rgba(0,180,166,0.35);background:rgba(0,180,166,0.08);}
+  .value-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform 0.35s;}
+  .value-card:hover::before{transform:scaleX(1);}
+  .value-icon{width:44px;height:44px;color:var(--teal);margin-bottom:20px;}
+  .value-card h3{font-family:var(--font-display);font-size:1.3rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;}
+  .value-card p{font-size:0.88rem;color:var(--off-white);opacity:0.75;line-height:1.75;}
+
+  /* OPPORTUNITIES */
+  .opps-section{padding:80px 0;background:var(--blue);position:relative;z-index:1;}
+  .opps-layout{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start;}
+  .opps-intro h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:900;text-transform:uppercase;line-height:1;color:var(--white);margin-bottom:16px;}
+  .opps-intro h2 span{color:var(--orange);}
+  .opps-intro p{font-size:0.9rem;color:var(--off-white);opacity:0.8;line-height:1.75;margin-bottom:16px;}
+
+  .opp-card{border:1px solid rgba(232,98,26,0.15);padding:32px;margin-bottom:2px;position:relative;overflow:hidden;transition:border-color 0.25s,background 0.25s;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%);}
+  .opp-card:hover{border-color:var(--orange);background:rgba(232,98,26,0.05);}
+  .opp-card.open{border-color:rgba(232,98,26,0.4);}
+  .opp-card.open::before{content:'OPEN';position:absolute;top:16px;right:24px;font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);background:rgba(232,98,26,0.15);padding:3px 10px;}
+  .opp-card.closed::before{content:'CLOSED';position:absolute;top:16px;right:24px;font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey);background:rgba(255,255,255,0.05);padding:3px 10px;}
+  .opp-type{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+  .opp-title{font-family:var(--font-display);font-size:1.3rem;font-weight:800;text-transform:uppercase;color:var(--white);margin-bottom:8px;line-height:1.2;padding-right:80px;}
+  .opp-desc{font-size:0.88rem;color:var(--grey);line-height:1.7;margin-bottom:16px;}
+  .opp-details{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+  .opp-detail-item{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--off-white);opacity:0.6;display:flex;align-items:center;gap:6px;}
+  .opp-detail-item::before{content:'◆';font-size:0.5rem;color:var(--teal);}
+  .opp-apply{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);text-decoration:none;border:1px solid rgba(232,98,26,0.35);padding:8px 16px;transition:border-color 0.2s,background 0.2s;}
+  .opp-apply:hover{border-color:var(--orange);background:rgba(232,98,26,0.1);}
+  .opp-apply:focus{outline:2px solid var(--teal);outline-offset:2px;}
+
+  /* PROCESS */
+  .process-section{padding:80px 0;background:var(--dark);position:relative;z-index:1;}
+  .process-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0;margin-top:48px;position:relative;}
+  .process-steps::before{content:'';position:absolute;top:32px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--teal),rgba(0,180,166,0.1));z-index:0;}
+  .process-step{padding:0 24px 32px;position:relative;z-index:1;}
+  .step-number{font-family:var(--font-display);font-size:2.5rem;font-weight:900;color:var(--teal);line-height:1;margin-bottom:12px;background:var(--dark);display:inline-block;padding-right:12px;}
+  .step-title{font-family:var(--font-display);font-size:1rem;font-weight:800;text-transform:uppercase;color:var(--white);margin-bottom:8px;}
+  .step-desc{font-size:0.82rem;color:var(--grey);line-height:1.65;}
+
+  /* INFORMAL CONTACT */
+  .contact-cta{padding:80px 0;background:var(--blue-mid);position:relative;overflow:hidden;z-index:1;}
+  .contact-cta::after{content:'HELLO';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--font-display);font-size:18vw;font-weight:900;color:rgba(0,180,166,0.04);pointer-events:none;}
+  .contact-cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .contact-cta h2{font-family:var(--font-display);font-size:clamp(2.5rem,4vw,3.5rem);font-weight:900;text-transform:uppercase;line-height:0.95;color:var(--white);margin-bottom:20px;}
+  .contact-cta h2 span{color:var(--teal);}
+  .contact-cta p{font-size:1rem;color:var(--off-white);opacity:0.85;line-height:1.8;margin-bottom:16px;}
+  .contact-box{background:rgba(0,0,0,0.3);border:1px solid rgba(0,180,166,0.2);padding:32px;}
+  .contact-box h3{font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;}
+  .contact-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .contact-item:last-child{border-bottom:none;}
+  .contact-item-label{font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);min-width:64px;margin-top:2px;}
+  .contact-item-value{font-size:0.88rem;color:var(--off-white);}
+  .contact-item-value a{color:var(--teal);text-decoration:none;}
+  .contact-item-value a:hover{text-decoration:underline;}
+
+  /* FOOTER */
+  footer{background:var(--dark);border-top:1px solid rgba(0,180,166,0.15);padding:60px 0 32px;position:relative;z-index:1;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+  .footer-brand p{font-size:0.85rem;color:var(--grey);line-height:1.75;margin-top:16px;max-width:280px;}
+  .footer-logo-text{font-family:var(--font-display);font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);}
+  .footer-logo-text span{color:var(--teal);}
+  .footer-col h4{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(0,180,166,0.2);}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:8px;}
+  .footer-col a{font-size:0.85rem;color:var(--grey);text-decoration:none;transition:color 0.2s;}
+  .footer-col a:hover{color:var(--teal);}
+  .footer-uob{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid rgba(0,180,166,0.15);text-decoration:none;margin-top:16px;transition:border-color 0.2s;}
+  .footer-uob:hover{border-color:var(--teal);}
+  .footer-uob-badge{background:var(--blue-light);width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:0.7rem;color:var(--white);flex-shrink:0;}
+  .footer-uob-text{font-size:0.75rem;color:var(--grey);line-height:1.4;}
+  .footer-uob-text strong{color:var(--off-white);display:block;font-size:0.8rem;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-bottom p{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);}
+  .footer-accessibility{display:flex;gap:16px;}
+  .footer-accessibility a{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);text-decoration:none;}
+  .footer-accessibility a:hover{color:var(--teal);}
+
+  section{position:relative;}
+  .section-label{font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .section-label::before{content:'';display:inline-block;width:20px;height:2px;background:var(--teal);}
+
+  @media(max-width:1024px){.join-hero-inner,.opps-layout,.contact-cta-inner{grid-template-columns:1fr;gap:40px;}.footer-grid{grid-template-columns:1fr 1fr;}.process-steps::before{display:none;}}
+  @media(max-width:768px){.nav-links,.nav-uob{display:none;}.nav-mobile-toggle{display:block;}.footer-grid{grid-template-columns:1fr;}}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="geo-bg" aria-hidden="true"></div>
+
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="#00B4A6" stroke-width="1.5" fill="none"/><polygon points="18,8 28,13 28,23 18,28 8,23 8,13" fill="rgba(0,180,166,0.15)" stroke="#00B4A6" stroke-width="1"/><circle cx="18" cy="18" r="4" fill="#E8621A"/><line x1="18" y1="2" x2="18" y2="8" stroke="#00B4A6" stroke-width="1.5"/><line x1="18" y1="28" x2="18" y2="34" stroke="#00B4A6" stroke-width="1.5"/><line x1="2" y1="10" x2="8" y2="13" stroke="#00B4A6" stroke-width="1.5"/><line x1="28" y1="23" x2="34" y2="26" stroke="#00B4A6" stroke-width="1.5"/><line x1="34" y1="10" x2="28" y2="13" stroke="#00B4A6" stroke-width="1.5"/><line x1="8" y1="23" x2="2" y2="26" stroke="#00B4A6" stroke-width="1.5"/></svg>
+      </div>
+      <div class="nav-logo-text">Respiratory<br>Microbiome Group<span>University of Birmingham</span></div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="research.html">Research</a></li>
+      <li><a href="people.html">People</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="join.html" aria-current="page">Join Us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="https://www.birmingham.ac.uk" class="nav-uob" target="_blank" rel="noopener noreferrer">UoB ↗</a>
+    <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="join-hero" aria-label="Join the group">
+    <div class="container" style="width:100%;">
+      <div class="join-hero-inner">
+        <div>
+          <p class="page-eyebrow orange">Work with us</p>
+          <h1 class="join-hero-title">Build your career in <em>respiratory science</em></h1>
+          <!-- EDIT: Personalise this with your own voice — why should someone join your group? -->
+          <p class="join-hero-body">We are a close-knit, collaborative group working on questions that genuinely matter for patients with chronic lung disease. Whether you're considering a PhD, postdoc, or a visiting placement, you'll be part of science that connects the bench to the bedside.</p>
+          <p class="join-hero-body">We take mentorship seriously. Your development — academic, professional, and personal — matters to us as much as the research.</p>
+          <a href="#opportunities" class="join-hero-cta">See open positions →</a>
+        </div>
+        <div class="hero-panel">
+          <h3>Group at a glance</h3>
+          <!-- EDIT: Update numbers to reflect your group -->
+          <div class="panel-stat"><span class="panel-stat-num">50+</span><span class="panel-stat-label">peer-reviewed publications</span></div>
+          <div class="panel-stat"><span class="panel-stat-num">15+</span><span class="panel-stat-label">alumni in academia, NHS &amp; industry</span></div>
+          <div class="panel-stat"><span class="panel-stat-num">3</span><span class="panel-stat-label">active clinical collaborations</span></div>
+          <div class="panel-stat"><span class="panel-stat-num">100%</span><span class="panel-stat-label">of PhDs completed on time</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section" aria-labelledby="values-heading">
+    <div class="container">
+      <p class="section-label">How we work</p>
+      <h2 id="values-heading" style="font-family:var(--font-display);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;text-transform:uppercase;color:var(--white);line-height:1;">Our <span style="color:var(--teal);">Values</span></h2>
+
+      <div class="values-grid" role="list">
+        <article class="value-card" role="listitem">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="22" cy="22" r="18"/><path d="M14 22 L20 28 L30 16"/></svg>
+          </div>
+          <h3>Open Science</h3>
+          <!-- EDIT: Adjust to reflect your actual practices -->
+          <p>We pre-register studies where appropriate, share data and code publicly, and aim to publish open access. We believe science is stronger when it's reproducible and transparent.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="8"/><circle cx="30" cy="28" r="8"/><line x1="22" y1="22" x2="22" y2="22" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Mentorship First</h3>
+          <p>Regular one-to-ones, structured career development conversations, and active support for fellowship and grant applications. We invest in you beyond the project.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="10" width="32" height="24" rx="2"/><line x1="14" y1="22" x2="30" y2="22"/><line x1="22" y1="14" x2="22" y2="30"/></svg>
+          </div>
+          <h3>Wellbeing Matters</h3>
+          <p>We take mental health and work–life balance seriously. Research is a marathon, not a sprint. Flexible working, realistic expectations, and a supportive lab culture are non-negotiable.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="22,4 38,14 38,30 22,40 6,30 6,14"/><circle cx="22" cy="22" r="6" fill="currentColor" opacity="0.2"/></svg>
+          </div>
+          <h3>Diversity &amp; Inclusion</h3>
+          <p>We actively welcome applications from candidates of all backgrounds, nationalities, and career histories. Diverse perspectives make better science — this is a genuine commitment, not a slogan.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 36 L22 8 L36 36"/><line x1="13" y1="28" x2="31" y2="28"/></svg>
+          </div>
+          <h3>Clinical Impact</h3>
+          <p>Our science is grounded in real patient populations and clinical questions. You will have the opportunity to engage with NHS clinical partners and see your research connect to healthcare.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="22" cy="14" r="6"/><path d="M10 38 Q10 26 22 26 Q34 26 34 38"/><circle cx="10" cy="14" r="4" opacity="0.5"/><circle cx="34" cy="14" r="4" opacity="0.5"/></svg>
+          </div>
+          <h3>International Network</h3>
+          <p>Active collaborations with groups in Europe, North America, and beyond. We support conference attendance and visiting fellowships to help you build your own professional network.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPPORTUNITIES -->
+  <section class="opps-section" id="opportunities" aria-labelledby="opps-heading">
+    <div class="container">
+      <div class="opps-layout">
+        <div class="opps-intro">
+          <p class="section-label" style="color:var(--orange);">&#9632; Open positions</p>
+          <h2 id="opps-heading">Current <span>Opportunities</span></h2>
+          <!-- EDIT: Update this text as positions change -->
+          <p>We advertise positions formally through <a href="https://www.birmingham.ac.uk/jobs" style="color:var(--teal);" target="_blank" rel="noopener noreferrer">University of Birmingham Jobs</a> and <a href="https://www.jobs.ac.uk" style="color:var(--teal);" target="_blank" rel="noopener noreferrer">jobs.ac.uk</a>.</p>
+          <p>For informal enquiries about any position — or to discuss a potential fellowship application — please email before applying formally.</p>
+          <p style="margin-top:24px;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);">Last updated: [Month Year] — EDIT this date when you update positions</p>
+        </div>
+
+        <div>
+          <!--
+          ════════════════════════════════════════
+          HOW TO ADD / UPDATE OPPORTUNITIES
+          ════════════════════════════════════════
+          1. Copy one opp-card block
+          2. Set class: "opp-card open" for active positions
+                        "opp-card closed" for recently closed ones
+          3. Fill in: type, title, description, details, apply link
+          4. Remove closed positions after a few months
+          ════════════════════════════════════════
+          -->
+
+          <article class="opp-card open">
+            <!-- EDIT: e.g. "PhD Studentship" / "Postdoctoral Research Fellow" / "MRes Project" / "Visiting Researcher" -->
+            <p class="opp-type">PhD Studentship</p>
+            <!-- EDIT: Project title -->
+            <h3 class="opp-title">[Project title, e.g. "Microbial determinants of COPD exacerbation frequency"]</h3>
+            <!-- EDIT: 2–3 sentence description -->
+            <p class="opp-desc">[Description of the project: what question it addresses, main methods, and what the student will gain. Keep it honest and appealing.]</p>
+            <div class="opp-details">
+              <!-- EDIT: Funding body, duration, eligibility, start date -->
+              <span class="opp-detail-item">Funder: [e.g. UKRI / MRC / Wellcome]</span>
+              <span class="opp-detail-item">Duration: [e.g. 4 years]</span>
+              <span class="opp-detail-item">Eligible: [e.g. UK &amp; International]</span>
+              <span class="opp-detail-item">Start: [e.g. October 2025]</span>
+            </div>
+            <!-- EDIT: Replace # with formal application URL, or use mailto -->
+            <a href="#" class="opp-apply" target="_blank" rel="noopener noreferrer">Apply / Enquire →</a>
+          </article>
+
+          <article class="opp-card open">
+            <p class="opp-type">Visiting Researcher</p>
+            <h3 class="opp-title">Short-term placements welcome</h3>
+            <p class="opp-desc">We welcome visiting researchers for 3–12 month placements. Bring your own fellowship funding, or get in touch to discuss options. Previous visitors have come from Europe, North America, and Australia.</p>
+            <div class="opp-details">
+              <span class="opp-detail-item">Duration: 3–12 months</span>
+              <span class="opp-detail-item">Flexible start dates</span>
+            </div>
+            <!-- EDIT: Replace with your email address -->
+            <a href="mailto:[GROUP-EMAIL]@birmingham.ac.uk" class="opp-apply">Get in touch →</a>
+          </article>
+
+          <article class="opp-card open">
+            <p class="opp-type">Undergraduate / MSc Project</p>
+            <h3 class="opp-title">Final-year and Masters projects (UoB students)</h3>
+            <p class="opp-desc">University of Birmingham students: we offer supervised projects in microbiology, bioinformatics, and clinical microbiome research annually. Projects are available in both wet lab and computational tracks.</p>
+            <div class="opp-details">
+              <span class="opp-detail-item">UoB students only</span>
+              <span class="opp-detail-item">Annual intake</span>
+            </div>
+            <a href="mailto:[GROUP-EMAIL]@birmingham.ac.uk" class="opp-apply">Enquire →</a>
+          </article>
+
+          <!-- EDIT: Add or remove positions as needed. Use class="opp-card closed" for filled roles -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION PROCESS -->
+  <section class="process-section" aria-labelledby="process-heading">
+    <div class="container">
+      <p class="section-label">What to expect</p>
+      <h2 id="process-heading" style="font-family:var(--font-display);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;text-transform:uppercase;color:var(--white);">Application <span style="color:var(--teal);">Process</span></h2>
+      <div class="process-steps" role="list">
+        <div class="process-step" role="listitem">
+          <div class="step-number">01</div>
+          <h3 class="step-title">Informal Enquiry</h3>
+          <p class="step-desc">Email us with your CV and a short paragraph on why you're interested. We respond to all enquiries.</p>
+        </div>
+        <div class="process-step" role="listitem">
+          <div class="step-number">02</div>
+          <h3 class="step-title">Informal Call</h3>
+          <p class="step-desc">A 30-minute video call to discuss the project, your background, and any questions you have about life in the group.</p>
+        </div>
+        <div class="process-step" role="listitem">
+          <div class="step-number">03</div>
+          <h3 class="step-title">Formal Application</h3>
+          <p class="step-desc">Submit through the University of Birmingham portal or funding body as required.</p>
+        </div>
+        <div class="process-step" role="listitem">
+          <div class="step-number">04</div>
+          <h3 class="step-title">Interview</h3>
+          <p class="step-desc">A formal interview, usually including a short presentation. We aim to give feedback to all candidates.</p>
+        </div>
+        <div class="process-step" role="listitem">
+          <div class="step-number">05</div>
+          <h3 class="step-title">Offer &amp; Start</h3>
+          <p class="step-desc">We support you through onboarding, including introductions to collaborators and lab induction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-cta" aria-labelledby="contact-cta-heading">
+    <div class="container">
+      <div class="contact-cta-inner">
+        <div>
+          <p class="section-label">Get in touch</p>
+          <h2 id="contact-cta-heading">Interested? <span>Talk to us first.</span></h2>
+          <!-- EDIT: Personalise this message in your own voice -->
+          <p>We strongly encourage informal enquiries before any formal application. It gives us both a chance to find out if the project and environment are a good fit.</p>
+          <p>There are no silly questions. We'd rather hear from ten curious people than miss one excellent candidate who didn't reach out.</p>
+        </div>
+        <div class="contact-box">
+          <h3>Contact Details</h3>
+          <div class="contact-item">
+            <span class="contact-item-label">Email</span>
+            <!-- EDIT: Replace with real email -->
+            <span class="contact-item-value"><a href="mailto:[GROUP-EMAIL]@birmingham.ac.uk">[GROUP-EMAIL]@birmingham.ac.uk</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">UoB Page</span>
+            <!-- EDIT: Replace URL with PI's actual UoB staff page -->
+            <span class="contact-item-value"><a href="https://www.birmingham.ac.uk/staff/[STAFF-URL]" target="_blank" rel="noopener noreferrer">Staff profile ↗</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Address</span>
+            <span class="contact-item-value">Institute of Microbiology &amp; Infection<br>University of Birmingham<br>Edgbaston, B15 2TT</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Social</span>
+            <!-- EDIT: Replace with real handles or delete -->
+            <span class="contact-item-value"><a href="https://bsky.app/profile/[HANDLE]" target="_blank" rel="noopener noreferrer">Bluesky ↗</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo-text">Respiratory <span>Microbiome</span> Group</p>
+        <p>Investigating the role of microbial communities in respiratory health and disease. Based at the Institute of Microbiology &amp; Infection, University of Birmingham.</p>
+        <a href="https://www.birmingham.ac.uk" class="footer-uob" target="_blank" rel="noopener noreferrer">
+          <span class="footer-uob-badge">UoB</span>
+          <span class="footer-uob-text"><strong>University of Birmingham</strong>Institute of Microbiology &amp; Infection</span>
+        </a>
+      </div>
+      <nav class="footer-col" aria-label="Site navigation">
+        <h4>Navigate</h4>
+        <ul><li><a href="research.html">Research</a></li><li><a href="people.html">People</a></li><li><a href="publications.html">Publications</a></li><li><a href="news.html">News</a></li><li><a href="join.html">Join Us</a></li><li><a href="index.html#contact">Contact</a></li></ul>
+      </nav>
+      <nav class="footer-col" aria-label="External links">
+        <h4>External</h4>
+        <ul><li><a href="https://www.birmingham.ac.uk" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a></li><li><a href="https://orcid.org/[ORCID-ID]" target="_blank" rel="noopener noreferrer">ORCID ↗</a></li><li><a href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></li><li><a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener noreferrer">PubMed ↗</a></li></ul>
+      </nav>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul><li><a href="mailto:[GROUP-EMAIL]@birmingham.ac.uk">[GROUP-EMAIL]@birmingham.ac.uk</a></li></ul>
+        <p style="font-size:0.8rem;color:var(--grey);margin-top:16px;line-height:1.7;">Institute of Microbiology &amp; Infection<br>University of Birmingham<br>Edgbaston, Birmingham<br>B15 2TT, UK</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Respiratory Microbiome Group · University of Birmingham</p>
+      <div class="footer-accessibility"><a href="#">Accessibility</a><a href="#">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+<script>
+  const toggle=document.querySelector('.nav-mobile-toggle');const navLinks=document.querySelector('.nav-links');if(toggle&&navLinks){toggle.addEventListener('click',()=>{const e=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!e));navLinks.style.display=e?'none':'flex';navLinks.style.flexDirection=e?'':'column';navLinks.style.position=e?'':'fixed';navLinks.style.top=e?'':'64px';navLinks.style.left=e?'':'0';navLinks.style.right=e?'':'0';navLinks.style.background=e?'':'rgba(6,14,24,0.97)';navLinks.style.padding=e?'':'16px 32px';navLinks.style.borderBottom=e?'':'1px solid rgba(0,180,166,0.2)';});}
+</script>
+</body>
+</html>

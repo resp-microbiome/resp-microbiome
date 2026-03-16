@@ -189,7 +189,7 @@
   </div>
 
   <!-- ORCID AUTO PUBLICATIONS FEED -->
-<div id="orcid-pubs" style="padding: 0 0 48px;">
+<div id="orcid-pubs" style="padding: 0 0 48px; max-width:1200px; margin:0 auto; padding-left:32px; padding-right:32px;">
   <div id="orcid-loading" style="
     text-align:center; 
     padding: 48px; 
@@ -351,107 +351,6 @@
   });
 })();
 </script>
-    
-  <!-- PUBLICATIONS LIST -->
-  <section class="pubs-section" aria-label="Publications list">
-    <div class="container">
-
-      <!--
-      ════════════════════════════════════════════════════════
-       HOW TO ADD PUBLICATIONS
-      ════════════════════════════════════════════════════════
-      1. Copy one pub-item block below
-      2. Fill in: title, authors, journal, DOI, year, tags
-      3. Wrap group members' names in: <span class="group-member">[Name]</span>
-      4. Add data-tags attribute to pub-item for filtering:
-         data-tags="clinical"  OR  data-tags="methods"  etc.
-         Multiple tags: data-tags="clinical open-access"
-      5. Add to the correct year group, or create a new one
-      ════════════════════════════════════════════════════════
-      -->
-
-      <!-- ── 2024 ── -->
-      <div class="pub-year-group" data-year="2024">
-        <h2 class="pub-year-heading" aria-label="Publications from 2024">2024</h2>
-
-        <!-- PUB TEMPLATE: copy and fill in for each paper -->
-        <article class="pub-item" data-tags="clinical open-access" role="listitem">
-          <span class="pub-number" aria-hidden="true">01</span>
-          <div class="pub-content">
-            <!-- EDIT: Replace with full paper title. Wrap in <a> with DOI link if available -->
-            <p class="pub-title">
-              <a href="https://doi.org/[DOI]" target="_blank" rel="noopener noreferrer">
-                [Full paper title — e.g. "Longitudinal changes in the lower airway microbiome during COPD exacerbation and recovery"]
-              </a>
-            </p>
-            <!-- EDIT: List all authors. Wrap current/past group members' names in <span class="group-member"> -->
-            <p class="pub-authors">
-              <span class="group-member">[Group Member Surname, Initials]</span>, [Co-author Surname, Initials], [Co-author Surname, Initials], <span class="group-member">[PI Surname, Initials]</span>
-            </p>
-            <!-- EDIT: Journal name, volume, pages, year -->
-            <p class="pub-journal">[Journal Name]. [Year];[Vol]([Issue]):[Pages].</p>
-            <div class="pub-meta">
-              <!-- EDIT: Add relevant tags. Options: clinical / methods / review / open-access -->
-              <span class="pub-tag clinical">Clinical</span>
-              <span class="pub-tag open-access">Open Access</span>
-              <!-- EDIT: Replace [DOI] with actual DOI string -->
-              <a href="https://doi.org/[DOI]" class="pub-doi" target="_blank" rel="noopener noreferrer">DOI: [DOI] ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="pub-item" data-tags="methods" role="listitem">
-          <span class="pub-number" aria-hidden="true">02</span>
-          <div class="pub-content">
-            <p class="pub-title">
-              <a href="https://doi.org/[DOI]" target="_blank" rel="noopener noreferrer">
-                [Full paper title]
-              </a>
-            </p>
-            <p class="pub-authors">
-              [Co-author Surname, Initials], <span class="group-member">[Group Member Surname, Initials]</span>, [Co-author Surname, Initials], <span class="group-member">[PI Surname, Initials]</span>
-            </p>
-            <p class="pub-journal">[Journal Name]. [Year];[Vol]([Issue]):[Pages].</p>
-            <div class="pub-meta">
-              <span class="pub-tag methods">Methods</span>
-              <a href="https://doi.org/[DOI]" class="pub-doi" target="_blank" rel="noopener noreferrer">DOI: [DOI] ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ADD MORE 2024 PAPERS HERE -->
-      </div>
-
-      <!-- ── 2023 ── -->
-      <div class="pub-year-group" data-year="2023">
-        <h2 class="pub-year-heading" aria-label="Publications from 2023">2023</h2>
-
-        <article class="pub-item" data-tags="review" role="listitem">
-          <span class="pub-number" aria-hidden="true">01</span>
-          <div class="pub-content">
-            <p class="pub-title">
-              <a href="https://doi.org/[DOI]" target="_blank" rel="noopener noreferrer">
-                [Full paper title]
-              </a>
-            </p>
-            <p class="pub-authors">
-              <span class="group-member">[PI Surname, Initials]</span>, [Co-author Surname, Initials]
-            </p>
-            <p class="pub-journal">[Journal Name]. [Year];[Vol]([Issue]):[Pages].</p>
-            <div class="pub-meta">
-              <span class="pub-tag review">Review</span>
-              <a href="https://doi.org/[DOI]" class="pub-doi" target="_blank" rel="noopener noreferrer">DOI: [DOI] ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ADD MORE 2023 PAPERS HERE -->
-      </div>
-
-      <!-- ── ADD EARLIER YEARS ──
-           Copy the pub-year-group div above for each year (2022, 2021, etc.)
-           and fill in the papers for that year.
-      -->
 
     </div>
   </section>

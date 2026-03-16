@@ -157,6 +157,7 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
     align-items: center;
     padding-top: 64px;
     overflow: hidden;
@@ -287,10 +288,11 @@
     filter: drop-shadow(0 0 40px rgba(0,180,166,0.3));
   }
 
-  /* Stats ticker */
+ /* Stats ticker */
   .hero-stats {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
+    position: relative;
+    grid-column: 1 / -1;
+    align-self: end;
     background: rgba(0,0,0,0.5);
     border-top: 1px solid rgba(0,180,166,0.3);
     display: grid;

@@ -131,6 +131,20 @@
   .alumni-now::before{content:'→';font-weight:700;}
   .alumni-links{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
 
+  /* COLLABORATORS */
+  .collab-section{padding:80px 0;background:var(--dark);}
+  .collab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:40px;}
+  .collab-card{background:rgba(255,255,255,0.02);border:1px solid rgba(0,180,166,0.12);padding:28px;transition:border-color 0.2s,background 0.2s;position:relative;overflow:hidden;}
+  .collab-card:hover{border-color:rgba(0,180,166,0.35);background:rgba(10,34,64,0.4);}
+  .collab-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--teal);opacity:0.4;transition:opacity 0.2s;}
+  .collab-card:hover::before{opacity:1;}
+  .collab-institution{font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+  .collab-name{font-family:var(--font-display);font-size:1.3rem;font-weight:800;text-transform:uppercase;color:var(--white);margin-bottom:4px;line-height:1.1;}
+  .collab-role{font-size:0.8rem;color:var(--grey);margin-bottom:14px;}
+  .collab-description{font-size:0.85rem;color:var(--off-white);opacity:0.8;line-height:1.7;margin-bottom:18px;}
+  .collab-links{display:flex;gap:6px;flex-wrap:wrap;}
+  @media(max-width:768px){.collab-grid{grid-template-columns:1fr;}}
+
   /* FOOTER */
   footer{background:var(--dark);border-top:1px solid rgba(0,180,166,0.15);padding:60px 0 32px;position:relative;z-index:1;}
   .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
@@ -243,83 +257,233 @@
       <p class="section-label">Current Members</p>
       <h2 id="members-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:40px;">The <span style="color:var(--teal);">Team</span></h2>
 
-      <div class="members-grid" role="list">
+      <!-- ── MEMBER CARD TEMPLATE ──
+           Each member gets the same layout as the PI card above.
+           Duplicate this entire <article class="pi-card"> block for each person.
+           id="member-[name]" allows linking from the homepage with people.html#member-[name] -->
 
-        <!-- ── MEMBER CARD TEMPLATE ──
-             Duplicate this block for each current member.
-             Fields to edit are marked with EDIT comments. -->
-
-        <article class="member-card" role="listitem">
-          <div class="member-photo" aria-label="Photo of [Member Name] — add image file to replace placeholder">
-            <div class="member-photo-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="28" r="15"/><path d="M10 72 Q10 52 40 52 Q70 52 70 72"/></svg>
-            </div>
-            <!-- EDIT: Replace comment with <img src="images/[filename].jpg" alt="[Member Name]"> -->
-            <div class="member-photo-overlay" aria-hidden="true"></div>
+      <!-- MEMBER 1 -->
+      <article class="pi-card" id="member-1" style="margin-bottom:2px;">
+        <div class="pi-photo">
+          <!-- EDIT: Add photo — replace this comment with:
+               <img src="images/firstname-lastname.jpg" alt="[Full Name]"> -->
+          <div class="pi-photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="30" r="18"/><path d="M8 78 Q8 56 40 56 Q72 56 72 78"/></svg>
           </div>
-          <div class="member-info">
-            <!-- EDIT: Change role label. Options: Postdoctoral Researcher / PhD Researcher / Research Fellow / MRes Student -->
-            <p class="member-role">Postdoctoral Researcher</p>
-            <!-- EDIT: Replace [Member Full Name] -->
-            <h3 class="member-name">[Member Full Name]</h3>
-            <!-- EDIT: Replace with their research focus (1–2 sentences) -->
-            <p class="member-focus">[Research focus: e.g. "Investigating microbiome dynamics in COPD using longitudinal 16S rRNA sequencing and bioinformatics pipeline development."]</p>
-            <div class="member-links">
-              <!-- EDIT: Replace # with URLs. Remove links that don't apply. -->
-              <a href="https://orcid.org/0000-0002-4002-1506" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
-              <a href="https://scholar.google.com/citations?user=VbX6lLQAAAAJ" class="link-btn" target="_blank" rel="noopener noreferrer">Scholar ↗</a>
-              <a href="https://github.com/[GITHUB-USERNAME]" class="link-btn" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-              <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            </div>
+        </div>
+        <div class="pi-content">
+          <!-- EDIT: Role — e.g. Postdoctoral Researcher / PhD Researcher / Research Fellow / MRes Student -->
+          <p class="pi-role">[Role]</p>
+          <!-- EDIT: Full name -->
+          <h3 class="pi-name">[Full Name]</h3>
+          <!-- EDIT: Title and department if applicable — delete line if not needed -->
+          <p class="pi-title">[Academic title, if applicable] · University of Birmingham</p>
+          <!-- EDIT: Short biography — 3–5 sentences -->
+          <p class="pi-bio">[Short biography — who are you, what do you work on, what draws you to the respiratory microbiome?]</p>
+          <div class="pi-links">
+            <!-- EDIT: Replace placeholders. Delete any lines that don't apply to this person. -->
+            <a href="https://www.birmingham.ac.uk/staff/[STAFF-URL]" class="link-btn" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://github.com/[GITHUB-USERNAME]" class="link-btn" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="member-card" role="listitem">
-          <div class="member-photo" aria-label="Photo of [Member Name] — add image file to replace placeholder">
-            <div class="member-photo-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="28" r="15"/><path d="M10 72 Q10 52 40 52 Q70 52 70 72"/></svg>
-            </div>
-            <div class="member-photo-overlay" aria-hidden="true"></div>
+      <!-- MEMBER 2 -->
+      <article class="pi-card" id="member-2" style="margin-bottom:2px;">
+        <div class="pi-photo">
+          <div class="pi-photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="30" r="18"/><path d="M8 78 Q8 56 40 56 Q72 56 72 78"/></svg>
           </div>
-          <div class="member-info">
-            <p class="member-role">PhD Researcher</p>
-            <h3 class="member-name">[Member Full Name]</h3>
-            <p class="member-focus">[Research focus: e.g. "Host–microbiome interactions in severe asthma: examining microbial regulation of airway epithelial barrier function."]</p>
-            <div class="member-links">
-              <a href="https://orcid.org/0000-0002-4002-1506" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
-              <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            </div>
+        </div>
+        <div class="pi-content">
+          <p class="pi-role">[Role]</p>
+          <h3 class="pi-name">[Full Name]</h3>
+          <p class="pi-title">[Academic title, if applicable] · University of Birmingham</p>
+          <p class="pi-bio">[Short biography — 3–5 sentences.]</p>
+          <div class="pi-links">
+            <a href="https://www.birmingham.ac.uk/staff/[STAFF-URL]" class="link-btn" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://github.com/[GITHUB-USERNAME]" class="link-btn" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- ADD MORE MEMBERS: Copy and paste one of the article blocks above for each additional member -->
+      <!-- MEMBER 3 -->
+      <article class="pi-card" id="member-3" style="margin-bottom:2px;">
+        <div class="pi-photo">
+          <div class="pi-photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="30" r="18"/><path d="M8 78 Q8 56 40 56 Q72 56 72 78"/></svg>
+          </div>
+        </div>
+        <div class="pi-content">
+          <p class="pi-role">[Role]</p>
+          <h3 class="pi-name">[Full Name]</h3>
+          <p class="pi-title">[Academic title, if applicable] · University of Birmingham</p>
+          <p class="pi-bio">[Short biography — 3–5 sentences.]</p>
+          <div class="pi-links">
+            <a href="https://www.birmingham.ac.uk/staff/[STAFF-URL]" class="link-btn" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://github.com/[GITHUB-USERNAME]" class="link-btn" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
+        </div>
+      </article>
 
-      </div>
+      <!-- MEMBER 4 -->
+      <article class="pi-card" id="member-4" style="margin-bottom:2px;">
+        <div class="pi-photo">
+          <div class="pi-photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="30" r="18"/><path d="M8 78 Q8 56 40 56 Q72 56 72 78"/></svg>
+          </div>
+        </div>
+        <div class="pi-content">
+          <p class="pi-role">[Role]</p>
+          <h3 class="pi-name">[Full Name]</h3>
+          <p class="pi-title">[Academic title, if applicable] · University of Birmingham</p>
+          <p class="pi-bio">[Short biography — 3–5 sentences.]</p>
+          <div class="pi-links">
+            <a href="https://www.birmingham.ac.uk/staff/[STAFF-URL]" class="link-btn" target="_blank" rel="noopener noreferrer">UoB Profile ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://github.com/[GITHUB-USERNAME]" class="link-btn" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- VISITORS -->
+  <!-- VISITORS — commented out until visitor arrives.
+       To activate: remove the opening and closing comment markers.
+       Rename id="visitor-1" to something meaningful e.g. id="visitor-jane-smith"
+       to allow direct linking from other pages. -->
+  <!--
   <section class="visitors-section" aria-labelledby="visitors-heading">
     <div class="container">
       <p class="section-label orange">Visiting Researchers</p>
-      <h2 id="visitors-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:40px;">Current <span style="color:var(--orange);">Visitors</span></h2>
+      <h2 id="visitors-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:16px;">Current <span style="color:var(--orange);">Visitors</span></h2>
+      <p style="font-size:0.95rem;color:var(--off-white);opacity:0.8;line-height:1.75;margin-bottom:40px;">Visiting researchers bring fresh perspectives and strengthen our international connections. If you are interested in spending time with the group, please <a href="join.html" style="color:var(--orange);">get in touch</a>.</p>
 
-      <div class="visitor-strip" role="list">
+      <article class="pi-card" id="visitor-1" style="border-color:rgba(232,98,26,0.25);">
+        <div class="pi-photo">
+          <div class="pi-photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="currentColor"><circle cx="40" cy="30" r="18"/><path d="M8 78 Q8 56 40 56 Q72 56 72 78"/></svg>
+          </div>
+        </div>
+        <div class="pi-content">
+          <p class="pi-role" style="color:var(--orange);">[Visit period, e.g. Jan – Jun 2026]</p>
+          <h3 class="pi-name">[Visitor Full Name]</h3>
+          <p class="pi-title">[Home institution, e.g. University of X, Country]</p>
+          <p class="pi-bio">[What they are working on during their visit, and a little about their background — 3–5 sentences. This is a good opportunity to highlight their work and help them gain visibility.]</p>
+          <div class="pi-links">
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+            <a href="https://www.linkedin.com/in/[LINKEDIN]" class="link-btn" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
+        </div>
+      </article>
 
-        <!-- EDIT: Fill in details for each current visitor. Duplicate block as needed. -->
-        <article class="visitor-card" role="listitem">
-          <!-- EDIT: Replace with visit dates e.g. "Jan – Jun 2025" -->
-          <p class="visitor-period">[Visit period, e.g. Jan – Jun 2025]</p>
-          <h3 class="visitor-name">[Visitor Full Name]</h3>
-          <!-- EDIT: Replace with their home institution -->
-          <p class="visitor-from">[Home institution, e.g. University of X, Country]</p>
-          <!-- EDIT: Brief description of what they're working on during visit -->
-          <p class="visitor-focus">[What they are working on during their visit.]</p>
+    </div>
+  </section>
+  -->
+
+  <!-- COLLABORATORS -->
+  <section class="collab-section" aria-labelledby="collab-heading">
+    <div class="container">
+      <p class="section-label">Key Collaborators</p>
+      <h2 id="collab-heading" style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;color:var(--white);">Research <span style="color:var(--teal);">Network</span></h2>
+      <p style="font-size:0.95rem;color:var(--off-white);opacity:0.8;line-height:1.75;margin-top:16px;max-width:640px;">Our work is strengthened by close collaborations with researchers across the UK and internationally. These partnerships bring complementary expertise and shared questions about the respiratory microbiome.</p>
+
+      <div class="collab-grid" role="list">
+
+        <!-- ── COLLABORATOR CARD TEMPLATE ──
+             Duplicate this block for each collaborator (up to ~6).
+             Delete any link lines that don't apply.
+             The description should focus on the nature of the collaboration
+             rather than a full biography. -->
+
+        <!-- COLLABORATOR 1 -->
+        <article class="collab-card" role="listitem">
+          <!-- EDIT: Institution name -->
+          <p class="collab-institution">[Institution name]</p>
+          <!-- EDIT: Full name -->
+          <h3 class="collab-name">[Full Name]</h3>
+          <!-- EDIT: Their role/title — e.g. Professor of Respiratory Medicine -->
+          <p class="collab-role">[Role / Title]</p>
+          <!-- EDIT: 2–3 sentences on the collaboration — what you work on together, why it matters -->
+          <p class="collab-description">[Description of the collaboration — what do you work on together, what expertise do they bring, and what does the partnership enable that neither group could do alone?]</p>
+          <div class="collab-links">
+            <!-- EDIT: Replace with real URLs. Delete lines that don't apply. -->
+            <a href="https://[their-website.com]" class="link-btn" target="_blank" rel="noopener noreferrer">Website ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
         </article>
 
-        <!-- If no current visitors, replace the card above with:
-        <p style="color:var(--grey);font-size:0.9rem;">No visitors currently in residence. Interested in visiting? <a href="join.html" style="color:var(--orange);">Get in touch →</a></p>
-        -->
+        <!-- COLLABORATOR 2 -->
+        <article class="collab-card" role="listitem">
+          <p class="collab-institution">[Institution name]</p>
+          <h3 class="collab-name">[Full Name]</h3>
+          <p class="collab-role">[Role / Title]</p>
+          <p class="collab-description">[Description of the collaboration.]</p>
+          <div class="collab-links">
+            <a href="https://[their-website.com]" class="link-btn" target="_blank" rel="noopener noreferrer">Website ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
+        </article>
+
+        <!-- COLLABORATOR 3 -->
+        <article class="collab-card" role="listitem">
+          <p class="collab-institution">[Institution name]</p>
+          <h3 class="collab-name">[Full Name]</h3>
+          <p class="collab-role">[Role / Title]</p>
+          <p class="collab-description">[Description of the collaboration.]</p>
+          <div class="collab-links">
+            <a href="https://[their-website.com]" class="link-btn" target="_blank" rel="noopener noreferrer">Website ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
+        </article>
+
+        <!-- COLLABORATOR 4 -->
+        <article class="collab-card" role="listitem">
+          <p class="collab-institution">[Institution name]</p>
+          <h3 class="collab-name">[Full Name]</h3>
+          <p class="collab-role">[Role / Title]</p>
+          <p class="collab-description">[Description of the collaboration.]</p>
+          <div class="collab-links">
+            <a href="https://[their-website.com]" class="link-btn" target="_blank" rel="noopener noreferrer">Website ↗</a>
+            <a href="https://orcid.org/[ORCID-ID]" class="link-btn orcid" target="_blank" rel="noopener noreferrer">ORCID ↗</a>
+            <a href="https://scholar.google.com/citations?user=[SCHOLAR-ID]" class="link-btn" target="_blank" rel="noopener noreferrer">Scholar ↗</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=[PUBMED-SEARCH]" class="link-btn" target="_blank" rel="noopener noreferrer">PubMed ↗</a>
+            <a href="https://bsky.app/profile/[HANDLE]" class="link-btn" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+          </div>
+        </article>
+
+        <!-- Add up to 2 more by copying a card block above -->
 
       </div>
     </div>
@@ -421,7 +585,7 @@
         <h4>Contact</h4>
         <ul>
           <!-- EDIT: Replace with real email address -->
-          <li><a href="mailto:m.j.cox@birmingham.ac.uk">m.j.cox@birmingham.ac.uk</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#93febdf9bdf0fcebd3f1fae1fefafdf4fbf2febdf2f0bde6f8"><span class="__cf_email__" data-cfemail="b6db98dc98d5d9cef6d4dfc4dbdfd8d1ded7db98d7d598c3dd">[email&#160;protected]</span></a></li>
         </ul>
         <p style="font-size:0.8rem;color:var(--grey);margin-top:16px;line-height:1.7;">Institute of Microbiology &amp; Infection<br>University of Birmingham<br>Edgbaston, Birmingham<br>B15 2TT, UK</p>
       </div>
@@ -436,10 +600,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const toggle = document.querySelector('.nav-mobile-toggle');
   const navLinks = document.querySelector('.nav-links');
-  if(toggle && navLinks){toggle.addEventListener('click',()=>{const e=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!e));navLinks.style.display=e?'none':'flex';navLinks.style.flexDirection=e?'':'column';navLinks.style.position=e?'':'fixed';navLinks.style.top=e?'':'64px';navLinks.style.left=e?'':'0';navLinks.style.right=e?'':'0';navLinks.style.background=e?'':'rgba(6,14,24,0.97)';navLinks.style.padding=e?'':'16px 32px';navLinks.style.borderBottom=e?'':'1px solid rgba(0,180,166,0.2)';});}
-</script>
-</body>
-</html>
+  if(toggle && navLinks){toggle.addEventListener('click',()=>{const e=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!e));navLinks.style.display=e?'none':'flex';navLinks.style.flexDirection=e?'':'column';navLinks.style.position=e?'':'fixed';navLinks.style.top=e?'':'
